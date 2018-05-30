@@ -1,0 +1,65 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1>Submit Property</h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Home</a></li>
+                        <li class="active">Créer un compte</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
+
+    <!-- Creat account start -->
+    <div class="submit-property">
+        <div class="container">
+            <div class="row">
+                <div class="main-title">
+                    <h1>{{ 'layout.login'|trans|capitalize }}</h1>
+                    <div class="border">
+                        <div class="border-inner"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-lg-offset-4 col-md-offset-4"
+                     style="border: 1px solid lightgrey; padding: 15px;">
+                    <div class="submit-address">
+
+                        {% include 'frontOffice/form/form_errors.html.twig' %}
+
+                        {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}) }) }}
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label>{{ 'form.new_password'|trans }}</label>
+                                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'input-text form-control', 'placeholder': 'form.new_password'|trans}} ) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label for="">{{ 'form.new_password_confirmation'|trans }}</label>
+                                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'input-text form-control', 'placeholder': 'form.new_password_confirmation'|trans}} ) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group text-right">
+                            <input type="submit" class="button-md button-theme btn-block text-uppercase"
+                                   value="{{ 'resetting.reset.submit'|trans }}"/>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

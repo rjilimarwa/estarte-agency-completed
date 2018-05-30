@@ -1,0 +1,18 @@
+<div class="block-erreurs">
+    {% trans_default_domain 'FOSClientBundle' %}
+
+    {% spaceless %}
+        {% if not form.vars.valid %}
+            <div class="alert alert-danger fade in">
+                <button class="close" data-dismiss="alert"><span>×</span></button>
+                {{ form_errors(form) }}
+                {% for children in form.children %}
+                    {% if not children.vars.valid %}
+                        {{ form_errors(children) }}
+                    {% endif %}
+                {% endfor %}
+                {{ form_errors(form.user.password.first) }}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+</div>

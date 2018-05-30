@@ -1,0 +1,50 @@
+<div class="my-account-box">
+    <div class="item">
+        <h3 class="title">
+            Gérer mes annonces
+        </h3>
+        <p>
+            <a href="{{ path('front_my_properties_list') }}">
+                <i class="flaticon-apartment"></i>Mes annonces
+            </a>
+        </p>
+        <p>
+            <a href="{{ path('front_my_properties_new') }}">
+                <i class="fa fa-plus"></i>Ajouter annonce
+            </a>
+        </p>
+    </div>
+    <div class="item">
+        <h3 class="title">
+            Gérer mon compte
+        </h3>
+        <p>
+            <a href="{{ path('fos_user_profile_show') }}">
+                <i class="flaticon-social"></i>Mon Profil
+            </a>
+        </p>
+        <p>
+            <a href="{{ path('front_my_favorite_properties') }}">
+                <i class="flaticon-shape"></i>Mes favoris
+            </a>
+        </p>
+    </div>
+    <div class="item">
+        <p>
+            <a href="{{ path('fos_user_profile_edit') }}">
+                <i class="flaticon-security"></i>Modifier profil
+            </a>
+        </p>
+        <p>
+            <a href="{{ path('fos_user_change_password') }}">
+                <i class="flaticon-security"></i>Changer Mot de passe
+            </a>
+        </p>
+        <p>
+            <a href="{{ path('fos_user_security_logout') }}">
+                <i class="flaticon-sign-out-option"></i>Déconnecter
+            </a>
+        </p>
+    </div>
+</div>
+<!-- My account box end -->

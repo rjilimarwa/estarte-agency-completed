@@ -1,0 +1,9 @@
+{% if is_granted('ROLE_ADMIN') %}
+    {% include "@FOSUser/Profile/show_content_administrator.html.twig" %}
+{% elseif is_granted('ROLE_COMPANY') %}
+    {% include "@FOSUser/Profile/show_content_company.html.twig" %}
+{% elseif is_granted('ROLE_PARTICULAR') %}
+    {% include "@FOSUser/Profile/show_content_particular.html.twig" %}
+{% else %}
+    <h1>Error 404</h1>
+{% endif %}

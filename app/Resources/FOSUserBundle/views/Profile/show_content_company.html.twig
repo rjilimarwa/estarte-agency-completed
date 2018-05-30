@@ -1,0 +1,97 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1>Mon compte</h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Mon profil</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
+
+    <!-- My profile start -->
+    <div class="my-profile">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4">
+                    <!-- My account box start -->
+                    {{ include('@FOSUser/Profile/left_side_bar.html.twig') }}
+                    <!-- My account box end -->
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-5">
+                    <!-- My address start-->
+                    <div class="my-address detail">
+                        <h1>Mon compte <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-info btn-xs pull-right">
+                                <i class="fa fa-pencil"></i> Modifier</a>
+                        </h1>
+                        <p>
+                            <strong>Raison social: </strong> {{ app.user.company.corporateName|title }}
+                        </p>
+                        <p>
+                            <strong>Email: </strong> {{ app.user.email }}
+                        </p>
+                        <p>
+                            <strong>Tél mobile: </strong> {{ app.user.company.mobile }}
+                        </p>
+                        <p>
+                            <strong>Tél fixe: </strong> {{ app.user.company.phone }}
+                        </p>
+                        <p>
+                            <strong>Fax: </strong> {{ app.user.company.fax }}
+                        </p>
+                        <p>
+                            <strong>Adresse: </strong> {{ app.user.company.address|capitalize }}
+                        </p>
+                        <p>
+                            <strong>Code postal: </strong> {{ app.user.company.postCode }}
+                        </p>
+                        <p>
+                            <strong>Ville: </strong> {{ app.user.area.city.name|title }}
+                        </p>
+                        <p>
+                            <strong>Région: </strong> {{ app.user.area.name|title }}
+                        </p>
+                        <p>
+                            <strong>Code TVA: </strong> {{ app.user.company.taxRegistrationNumber }}
+                        </p>
+                        <p>
+                            <strong>Date inscription: </strong> {{ app.user.createdAt|date('d/m/Y à H:i') }}
+                        </p>
+                        <p>
+                            <strong>Dérnier connexion le: </strong> {{ app.user.lastLogin|date('d/m/Y à H:i') }}
+                        </p>
+                    </div>
+                    <!-- My address end -->
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <!-- Avatar start -->
+                    <div class="edit-profile-photo">
+                        <img src="{{ asset(app.user.company.logo.webPath) }}" alt="{{ app.user.company.corporateName }}" class="img-responsive">
+                        {#<div class="change-photo-btn">
+                            <div class="photoUpload">
+                                <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                <input type="file" class="upload">
+                            </div>
+                        </div>#}
+                    </div>
+                    <!-- Avatar end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- My profile end -->
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1>Inscription</h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Créer un compte</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
+
+    <!-- Creat account start -->
+    <div class="submit-property">
+        <div class="container">
+            <div class="row">
+                <div class="main-title">
+                    <h1>{{ 'layout.register'|trans|capitalize }}</h1>
+                    <div class="border">
+                        <div class="border-inner"></div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+                    <div class="submit-address">
+
+                        {% spaceless %}
+                            {% if not form.vars.valid %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(form) }}
+                                    {% for children in form.children %}
+                                        {% if not children.vars.valid %}
+                                            {{ form_errors(children) }}
+                                        {% endif %}
+                                        {% for child in children %}
+                                            {% if not child.vars.valid %}
+                                                {{ form_errors(child) }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                    <span class="close"></span>
+                                </div>
+                            {% endif %}
+                        {% endspaceless %}
+
+                        {% if app.request.query.get("type") == 'company' %}
+                            {{ include('@FOSUser/Registration/register_company.html.twig') }}
+                        {% elseif app.request.query.get("type") == 'particular' %}
+                            {{ include('@FOSUser/Registration/register_particular.html.twig') }}
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

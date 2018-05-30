@@ -1,0 +1,302 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% form_theme form 'frontOffice/form_layout/base_from.html.twig' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1>Mon compte</h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Modifier annonce</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
+
+    <!-- My profile start -->
+    <div class="my-profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-4">
+                <!-- My account box start -->
+                {{ include('@FOSUser/Profile/left_side_bar.html.twig') }}
+                <!-- My account box end -->
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-8">
+                <!-- My address start-->
+                <div class="my-address">
+                    <h1>Modifier une annonce</h1>
+                    {% spaceless %}
+                        {% if not form.vars.valid %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(form) }}
+                                {% for children in form.children %}
+                                    {% if not children.vars.valid %}
+                                        {{ form_errors(children) }}
+                                    {% endif %}
+                                    {% for child in children %}
+                                        {% if not child.vars.valid %}
+                                            {{ form_errors(child) }}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                <span class="close"></span>
+                            </div>
+                        {% endif %}
+                    {% endspaceless %}
+                    <form action="{{ path('front_my_properties_edit', {'token': entity.token}) }}" method="post"
+                          enctype="multipart/form-data">
+                            <div class="col-lg-6 col-md-4 col-sm-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.operation.vars.id }}">Opération</label>
+                                    {{ form_widget(form.operation, { 'attr': {'class': 'selectpickers search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': ''}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-4 col-sm-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.category.vars.id }}">Type de bien</label>
+                                    {{ form_widget(form.category, { 'attr': {'class': 'selectpickers search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': ''}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.city.vars.id }}">Ville</label>
+                                    {{ form_widget(form.city, { 'attr': {'class': 'selectpickerr search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': ''}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.area.vars.id }}">Région</label>
+                                    {{ form_widget(form.area, { 'attr': {'class': 'selectpickers search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': ''}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.situation.vars.id }}">Situation</label>
+                                    {{ form_widget(form.situation, { 'attr': {'class': 'selectpickers search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': ''}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.title.vars.id }}">Titre</label>
+                                    {{ form_widget(form.title, { 'attr': {'class': 'input-text'}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.description.vars.id }}">Déscription</label>
+                                    {{ form_widget(form.description, { 'attr': {'class': 'input-text'}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.price.vars.id }}">Prix</label>
+                                    {{ form_widget(form.price, { 'attr': {'class': 'input-text'}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.displayPrice, { 'attr': {'class': ''}} ) }}
+                                        <label for="{{ form.displayPrice.vars.id }}">Afficher prix</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br clear="left">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.floorArea.vars.id }}">Superficie</label>
+                                    {{ form_widget(form.floorArea, { 'attr': {'class': 'input-text'}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.plotArea.vars.id }}">Superficie couverte</label>
+                                    {{ form_widget(form.plotArea, { 'attr': {'class': 'input-text'}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.roomNumber.vars.id }}">Chambres</label>
+                                    {{ form_widget(form.roomNumber, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.livingRoomNumber.vars.id }}">Salons</label>
+                                    {{ form_widget(form.livingRoomNumber, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.bathRoomNumber.vars.id }}">Salle de bains</label>
+                                    {{ form_widget(form.bathRoomNumber, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.kitchenNumber.vars.id }}">Cuisine</label>
+                                    {{ form_widget(form.kitchenNumber, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.terrace.vars.id }}">Terrasse</label>
+                                    {{ form_widget(form.terrace, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.floorNumber.vars.id }}">Numéro étage</label>
+                                    {{ form_widget(form.floorNumber, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="row features">
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pad-lft-0">
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            {{ form_widget(form.balcony, { 'attr': {'class': ''}} ) }}
+                                            <label for="{{ form.balcony.vars.id }}">Balcon</label>
+                                        </div>
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            {{ form_widget(form.garden, { 'attr': {'class': ''}} ) }}
+                                            <label for="{{ form.garden.vars.id }}">Jardin</label>
+                                        </div>
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            {{ form_widget(form.garage, { 'attr': {'class': ''}} ) }}
+                                            <label for="{{ form.garage.vars.id }}">Garage</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pad-lft-0">
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            {{ form_widget(form.parking, { 'attr': {'class': ''}} ) }}
+                                            <label for="{{ form.parking.vars.id }}">Parking</label>
+                                        </div>
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            {{ form_widget(form.elevator, { 'attr': {'class': ''}} ) }}
+                                            <label for="{{ form.elevator.vars.id }}">Ascenseur</label>
+                                        </div>
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            {{ form_widget(form.heating, { 'attr': {'class': ''}} ) }}
+                                            <label for="{{ form.heating.vars.id }}">Chauffage</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pad-lft-0">
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            {{ form_widget(form.airConditioner, { 'attr': {'class': ''}} ) }}
+                                            <label for="{{ form.airConditioner.vars.id }}">Climatisation</label>
+                                        </div>
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            {{ form_widget(form.alarmSystem, { 'attr': {'class': ''}} ) }}
+                                            <label for="{{ form.alarmSystem.vars.id }}">Systéme alarme</label>
+                                        </div>
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            {{ form_widget(form.wifi, { 'attr': {'class': ''}} ) }}
+                                            <label for="{{ form.wifi.vars.id }}">Wifi</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pad-lft-0">
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            {{ form_widget(form.swimmingPool, { 'attr': {'class': ''}} ) }}
+                                            <label for="{{ form.swimmingPool.vars.id }}">Piscine</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.active, { 'attr': {'class': ''}} ) }}
+                                        <label for="{{ form.active.vars.id }}">Publier maintenant</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br clear="left">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pad-lft-0">
+                                <div class="form-group">
+                                    <label for="{{ form.image.vars.id }}">Image</label>
+                                    {{ form_widget(form.image, { 'attr': {'class': ''}} ) }}
+                                </div>
+                            </div>
+                            <br clear="left">
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <h4>Photos</h4>
+                                <ul class="add-files"
+                                    data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}">
+                                    {% for element in form.photos %}
+                                        <li>
+                                            {{ form_widget(element) }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div class="row">
+                                {{ form_rest(form) }}
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="button-md button-theme">Enregistrer</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% spaceless %}
+                            {% if not form.vars.valid %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(form) }}
+                                    {% for children in form.children %}
+                                        {% if not children.vars.valid %}
+                                            {{ form_errors(children) }}
+                                        {% endif %}
+                                        {% for child in children %}
+                                            {% if not child.vars.valid %}
+                                                {{ form_errors(child) }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                    <span class="close"></span>
+                                </div>
+                            {% endif %}
+                        {% endspaceless %}
+                    </form>
+                    <!-- My address end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- My profile end -->
+
+{% endblock %}
+        {% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset('frontOffice/upload-multiple.js') }}"></script>
+        <script>
+        var $city = $('#property_city');
+        // When sport gets selected ...
+        $city.change(function () {
+            var data = $city.val();
+            $.ajax({
+                url: "{{ path('front_properties_get_villes_ajout') }}" + "?id=" + data,
+                type: 'GET',
+                data: data,
+                dataType: 'json',
+                success: function (html) {
+                    $('#property_area').replaceWith(html);
+                }
+            });
+        });
+    </script>
+{% endblock %}

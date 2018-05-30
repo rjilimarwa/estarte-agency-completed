@@ -1,0 +1,23 @@
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_widget(form.name) }}
+        </div>
+        {{ form_rest(form) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <span class="loading">
+            <i class="fa fa-spinner fa-pulse text-primary fa-4x" aria-hidden="true"></i>
+        </span>
+        <button class="btn btn-info btn-labeled fa fa-save fa-lg btn-edit-ajax" type="submit"
+                onsubmit=" return false;">Enregistrer
+        </button>
+        &nbsp;&nbsp;
+        <button type="reset" class="btn btn-warning btn-labeled fa fa-repeat fa-lg" id="reset">
+            Réinstaller
+        </button>
+    </div>
+</div>

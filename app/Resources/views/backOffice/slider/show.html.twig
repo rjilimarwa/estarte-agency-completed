@@ -1,0 +1,30 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <!--Modal header-->
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!--Modal body-->
+        <div class="modal-body">
+            <table class="table table-striped">
+                <tr>
+                    <td><img src="{{ asset(entity.webPath) }}" class="img-responsive" style="margin: auto"></td>
+                </tr>
+                <tr>
+                    <td class="text-center text-1x">{{ entity.description|default('') }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <!--Modal footer-->
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-primary" type="button">
+                Fermer
+            </button>
+        </div>
+    </div>
+</div>
+

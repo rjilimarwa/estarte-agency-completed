@@ -1,0 +1,82 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1>Mon compte</h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Changer mot de passe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
+
+    <!-- My profile start -->
+    <div class="my-profile">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4">
+                    <!-- My account box start -->
+                    {{ include('@FOSUser/Profile/left_side_bar.html.twig') }}
+                    <!-- My account box end -->
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-5">
+                    <!-- My address start-->
+                    <div class="my-address">
+                        <h1>Changer le mot de passe</h1>
+
+                        <form action="{{ path('fos_user_change_password') }}" method="post">
+                            <div class="form-group">
+                                <label for="{{ form.current_password.vars.id }}">{{ 'form.current_password'|trans }}</label>
+                                {{ form_widget(form.current_password, { 'attr': {'class': 'input-text'}} ) }}
+                                <span class="text-danger">{{ form_errors(form.current_password) }}&nbsp;</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.plainPassword.first.vars.id }}">
+                                    {{ 'form.new_password'|trans }}
+                                </label>
+                                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'input-text'}} ) }}
+                                <span class="text-danger">{{ form_errors(form.plainPassword.first) }}&nbsp;</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.plainPassword.second.vars.id }}">
+                                    {{ 'form.new_password_confirmation'|trans }}
+                                </label>
+                                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'input-text form-control'}} ) }}
+                                <span class="text-danger">{{ form_errors(form.plainPassword.second) }}&nbsp;</span>
+                            </div>
+                            {{ form_rest(form) }}
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <button type="submit"
+                                                class="button-md button-theme">{{ 'change_password.submit'|trans }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- My address end -->
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <!-- Avatar start -->
+                    <div class="edit-profile-photo">
+
+                    </div>
+                    <!-- Avatar end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- My profile end -->
+{% endblock %}

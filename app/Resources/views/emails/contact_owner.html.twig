@@ -1,0 +1,29 @@
+<p><strong>Sujet: </strong>{{ subject|capitalize }}</p>
+
+<p>{{ name|title }}</p>
+<p>
+    {{ message }}
+</p>
+{% if tel != '' %}
+    <br><br>
+    <p>
+        Contacter l'envoyeur par téléphone au {{ tel }}
+    </p>
+{% endif %}
+<br>
+<p>
+    Cette annonce a été publiée à <a
+            href="{{ url('front_office_property_show', {'slug': entity.slug}) }}">{{ url('front_office_property_show', {'slug': entity.slug}) }}</a>
+    <br>
+</p>
+<p>
+    ---------------------------------------------------------------------
+    <br>
+    Cet e-mail a été envoyé depuis un formulaire sur le site<br>
+    Immobiliere.tn et concerne l'annonce "{{ entity.title }}".
+</p>
+<p>
+    ---
+    <br>
+    Merci d'utiliser Immobiliere.tn
+</p>

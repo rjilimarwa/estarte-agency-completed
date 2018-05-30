@@ -1,0 +1,90 @@
+{% extends 'backOffice/base.html.twig' %}
+
+{% block page_title %}Lire message{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">Lire message envoyé</li>
+{% endblock breadcrumb %}
+
+{% block body %}
+<div class="tab-base">
+    <ul class="nav nav-tabs">
+        <li>
+            <a href="{{ path('back_message_received_list') }}" aria-expanded="false">Recus <span
+                        class="badge badge-purple"></span></a>
+        </li>
+        <li>
+            <a href="{{ path('back_message_sent_list') }}"
+               aria-expanded="false">Envoyés <span
+                        class="badge badge-purple"></span>
+            </a>
+        </li>
+        <li class="">
+            <a data-toggle="tab" href="" aria-expanded="true">Ecrire</a>
+        </li>
+    </ul>
+
+    <div class="panel panel-default panel-left">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-7">
+                    <!--Sender Information-->
+                    <div class="media">
+                        <div class="media-body">
+                            <div class="text-lg">
+                                <strong>A:</strong> <small class="text-muted" style="font-size: 12px;"><i
+                                            class="fa fa-envelope"></i> {{ entity.email }}
+                                </small>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr-sm visible-xs">
+                <div class="col-sm-5 clearfix">
+
+                    <!--Details Information-->
+                    <div class="pull-right text-right">
+                        <p class="mar-no">
+                            <small class="text-muted text-lg">{{ entity.createdAt|localizeddate('full', format='dd MMM yyyy à HH:MM') }}</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row pad-ver">
+                <div class="col-xs-7">
+
+                    <!--Mail toolbar-->
+                    <div class="btn-group btn-group">
+                        <h5>Sujet: {{ entity.subject|title }}</h5>
+                    </div>
+                </div>
+                <div class="col-xs-5 clearfix">
+                    <div class="pull-right">
+                        <div class="btn-group btn-group">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Message-->
+            <!--===================================================-->
+            <div class="pad-all bord-all bg-gray-light">
+                {% autoescape false %}
+                    {{ entity.message }}
+                {% endautoescape %}
+            </div>
+            <!--===================================================-->
+            <!--End Message-->
+
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+
+
+
+

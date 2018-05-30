@@ -1,0 +1,177 @@
+<!--MAIN NAVIGATION-->
+<!--===================================================-->
+
+<nav id="mainnav-container">
+    <div id="mainnav">
+
+        <!--Shortcut buttons-->
+        <!--================================-->
+        <div id="mainnav-shortcut">
+
+        </div>
+        <!--================================-->
+        <!--End shortcut buttons-->
+        <!--Menu-->
+        <!--================================-->
+        <div id="mainnav-menu-wrap">
+            <div class="nano">
+                <div class="nano-content">
+                    <ul id="mainnav-menu" class="list-group">
+
+                        <!--Category name-->
+                        <li class="list-header">Navigation</li>
+
+                        <!--Menu list item-->
+
+                        <div class="progress progress-sm">
+                            <div class="progress-bar progress-bar-danger" style="width: 100%;">
+                            </div>
+                        </div>
+
+                        <li {{ (app.request.attributes.get('_route') == 'back_list_properties') ? ' class="active-link"' }}>
+                            <a href="#">
+                                <i class="fa fa-list"></i>
+                                <span class="menu-title">Annonces</span>
+                                <i class="arrow"></i>
+                            </a>
+                            <!--Submenu-->
+                            <ul class="collapse {{ (app.request.attributes.get('_route') == 'back_list_properties') ? 'in' }}">
+                                <li>
+                                    <a href="{{ path('back_list_properties', {'interval':'tous'}) }}">Tous</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('back_list_properties', {'interval':'aujourdhui'}) }}">Aujourd'hui</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('back_list_properties', {'interval':'hier'}) }}">Hier</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('back_list_properties', {'interval':'waiting'}) }}">En attente</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('back_list_properties', {'interval':'valid'}) }}">Validés</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('back_list_properties', {'interval':'rejected'}) }}">Rejetés</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <div class="progress progress-sm">
+                            <div class="progress-bar progress-bar-success" style="width: 100%;">
+                            </div>
+                        </div>
+
+                        <li {{ (app.request.attributes.get('_route') == 'back_list_users') ? ' class="active-link"' }}>
+                            <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span class="menu-title">Utilisateurs</span>
+                                <i class="arrow"></i>
+                            </a>
+                            <!--Submenu-->
+                            <ul class="collapse {{ (app.request.attributes.get('_route') == 'back_list_users') ? 'in' }}">
+                                <li>
+                                    <a href="{{ path('back_list_users', {'type':'tous'}) }}">Tous</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('back_list_users', {'type':'entreprise'}) }}">Entreprises</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('back_list_users', {'type':'particulier'}) }}">Particuliers</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('back_list_users', {'type':'disabled'}) }}">Blockés</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <div class="progress progress-sm">
+                            <div class="progress-bar progress-bar-info" style="width: 100%;">
+                            </div>
+                        </div>
+
+                        <!--Messagerie-->
+                        <li class="active">
+                            <a href="#">
+                                <i class="psi-mail"></i>
+                                <span class="menu-title">Messagerie</span>
+                                <i class="arrow"></i>
+                            </a>
+                            <!--Submenu-->
+                            <ul class="collapse">
+                                <li {{ (app.request.attributes.get('_route') == 'back_message_received_list') ? ' class="active-link"' }}>
+                                    <a href="{{ path('back_message_received_list') }}">Reception</a>
+                                </li>
+                                <li {{ (app.request.attributes.get('_route') == 'back_message_sent_list') ? ' class="active-link"' }}>
+                                    <a href="{{ path('back_message_sent_list') }}">Envoyés</a>
+                                </li>
+                                <li {{ (app.request.attributes.get('_route') == 'back_message_sent_new') ? ' class="active-link"' }}>
+                                    <a href="{{ path('back_message_sent_new') }}">Ecrire Message</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <div class="progress progress-sm">
+                            <div class="progress-bar progress-bar-info" style="width: 100%;">
+                            </div>
+                        </div>
+
+                        <li {{ (app.request.attributes.get('_route') == 'back_slider_list') ? ' class="active-link"' }}>
+                            <a href="{{ path('back_slider_list') }}">
+                                <i class="fa fa-sliders"></i>
+                                <span class="menu-title">Sliders</span>
+                            </a>
+                        </li>
+
+                        <div class="progress progress-sm">
+                            <div class="progress-bar progress-bar-purple" style="width: 100%;">
+                            </div>
+                        </div>
+
+                        <li {{ (app.request.attributes.get('_route') == 'back_office_statistic') ? ' class="active-link"' }}>
+                            <a href="{{ path('back_office_statistic') }}">
+                                <i class="fa fa-bar-chart"></i>
+                                <span class="menu-title">Statistiques</span>
+                            </a>
+                        </li>
+
+                        <div class="progress progress-sm">
+                            <div class="progress-bar progress-bar-info" style="width: 100%;">
+                            </div>
+                        </div>
+
+                        <li {{ (app.request.attributes.get('_route') == 'back_office_area_list') ? ' class="active-link"' }}>
+                            <a href="{{ path('back_office_area_list') }}">
+                                <i class="fa fa-map-marker"></i>
+                                <span class="menu-title">Villes</span>
+                            </a>
+                        </li>
+
+                        <!--users-->
+                        {#{% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <div class="progress progress-sm">
+                                <div class="progress-bar progress-bar-pink" style="width: 100%;">
+                                </div>
+                            </div>
+                            <li {{ (app.request.attributes.get('_route') == 'back_administrator_list') ? ' class="active-link"' }}>
+                                <a href="{{ path('back_administrator_list') }}">
+                                    <i class="fa fa-user-secret"></i>
+                                    <span class="menu-title">Administrateurs</span>
+                                </a>
+                            </li>
+
+                        {% endif %}#}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--================================-->
+        <!--End menu-->
+
+    </div>
+</nav>
+
+<!--===================================================-->
+<!--END MAIN NAVIGATION-->

@@ -1,0 +1,7 @@
+<select id="property_area" name="property[area]" required="required" class="selectpickers search-fieldss form-control"
+        data-live-search="true" data-live-search-placeholder="">
+    <option value="">Choisir une region</option>
+    {% for ville in villes %}
+        <option value="{{ ville.id }}">{{ ville.name }}</option>
+    {% endfor %}
+</select>

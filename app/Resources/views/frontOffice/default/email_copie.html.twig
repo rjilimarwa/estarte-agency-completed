@@ -1,0 +1,16 @@
+
+<h4>
+    Vous avez récu un nouveau message dans votre boite messagerie.
+</h4>
+
+<p>Nom et prénom: {{ name }}</p>
+<p>Tél : {{ tel|default('') }}</p>
+
+<p>Sujet: {{ subject }}</p>
+<p>
+    {{ message }}
+</p>
+
+<p>
+    <a href="{{ url('back_message_received_show', {'id': entity.id}) }}">Lire message</a>
+</p>

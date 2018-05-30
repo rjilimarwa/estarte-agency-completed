@@ -1,0 +1,72 @@
+{% extends 'backOffice/base.html.twig' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">Catégories</li>
+{% endblock breadcrumb %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Liste des catégories</h3>
+                </div>
+
+                {{ render(controller('AppBundle:BackOffice/CategoryBack:newForm')) }}
+
+                <!-- modal pour form edit -->
+                <div class="modal fade" id="myModalEdit" role="dialog" tabindex="-1"
+                     aria-labelledby="demo-default-modal" aria-hidden="true">
+                </div>
+                <!-- fin modal form edit -->
+
+                <div class="panel-body">
+                    <div class="pad-btm form-inline">
+                        <div class="row">
+                            <div class="col-sm-6 text-xs-center">
+                                <div class="form-group">
+                                    <a href="" id="demo-btn-addrow" class="btn btn-success btn-labeled fa fa-plus"
+                                       data-remote="false" data-toggle="modal"
+                                       data-target="#myModalAdd">Ajouter
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <main>
+                        <div id="load-ajax">
+                            <table id=""
+                                   class="table table-hover table-vcenter toggle-circle table-striped breakpoint footable">
+                                <caption>Resultat: {{ entities.getTotalItemCount }} </caption>
+                                <thead>
+                                <tr>
+                                    <th class="col-lg-5">Nom catégorie</th>
+                                    <th class="col-lg-2 text-center" data-sort-ignore="true">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr id="new-element"></tr>
+                                {% for entity in entities %}
+                                    {{ include('backOffice/category/tr.html.twig') }}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <div class="dataTables_paginate paging_simple_numbers">
+                                {{ knp_pagination_render(entities) }}
+                            </div>
+
+                            <div id="divLoading">
+                                <i class="fa fa-spinner fa-pulse text-primary fa-20x" aria-hidden="true"></i>
+                            </div>
+
+                        </div>
+                    </main>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

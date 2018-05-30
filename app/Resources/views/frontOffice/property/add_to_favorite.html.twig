@@ -1,0 +1,24 @@
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    <a id="add-fav-{{ entity.id }}" class="text-12 text-base-color add-to-favorite add-fav"
+       data-toggle="tooltip"
+       title="Ajouter au liste des favoris"
+       data-target="{{ path('front_favorite_new', {'token': entity.token}) }}"
+       data-entity-id="{{ entity.id }}"
+       {% if entity.id in ids %}style="display: none" {% endif %}>
+        <i class="fa fa-heart text-danger"></i> Ajouter aux favoris
+    </a>
+    <a id="remove-fav-{{ entity.id }}" class="text-12 text-danger add-to-favorite remove-fav"
+       data-toggle="tooltip"
+       title="Retirer de la liste des favoris"
+       data-target="{{ path('front_favorite_remove', {'token': entity.token}) }}"
+       data-entity-id="{{ entity.id }}"
+       style="display: {% if entity.id not in ids %}none{% else %}inline{% endif %}">
+        <i class="fa fa-heart" style="color: indianred"></i> Supprimer de favoris
+    </a>
+    <!-- if user is not AUTHENTICATED_REMEMBERED -->
+{% else %}
+    <a class="text-12 text-base-color add-to-favorite must-login"
+       title="Ajouter aux favoris" href="{{ path('fos_user_security_login') }}">
+        <i class="fa fa-heart text-danger"></i> Ajouter aux favoris
+    </a>
+{% endif %}

@@ -1,0 +1,28 @@
+
+<h4>
+    Vous avez récu un nouveau message dans votre boite messagerie.
+</h4>
+
+<p>{{ name|title }}</p>
+<p>
+    {{ message }}
+</p>
+{% if tel != '' %}
+    <br><br>
+    <p>
+        Contacter l'envoyeur par téléphone au {{ tel }}
+    </p>
+{% endif %}
+<br>
+<p>
+    ---------------------------------------------------------------------
+    <br>
+
+    <a href="{{ url('back_message_received_show', {'id': entity.id}) }}">Lire message</a>
+</p>
+
+<p>
+    ---------------------------------------------------------------------
+    <br>
+    Cet e-mail est une copie d'un message envoyé depuis un formulaire sur le site Immobiliere.tn
+</p>

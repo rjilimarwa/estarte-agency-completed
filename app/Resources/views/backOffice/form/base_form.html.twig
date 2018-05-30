@@ -1,0 +1,149 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_widget_simple %}
+    <div class="form-group">
+        <label class="control-label">{{ label }}
+            {% if required %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        {% set type = type|default('text') %}
+        <input type="{{ type }}"
+               class="form-control input-lg" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endblock %}
+
+{# textarea#}
+{% block textarea_widget %}
+
+    <div class="form-group">
+        <label class="control-label">{{ label }}
+            {% if required %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        {% set type = type|default('textarea') %}
+        <textarea
+                class="form-control input-lg" {{ block('widget_attributes') }} >{% if value is not empty %}{{ value }}{% endif %}</textarea>
+    </div>
+
+{% endblock %}
+
+{# choice#}
+{% block choice_widget %}
+
+    <div class="form-group">
+        <label class="control-label">{{ label }}
+            {% if required %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        {%- if required and placeholder is none and not placeholder_in_choices and not multiple and (attr.size is not defined or attr.size <= 1) -%}
+            {% set required = false %}
+        {%- endif -%}
+        <select class="form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+            {%- if placeholder is not none -%}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</option>
+            {%- endif -%}
+            {%- if preferred_choices|length > 0 -%}
+                {% set options = preferred_choices %}
+                {{- block('choice_widget_options') -}}
+                {%- if choices|length > 0 and separator is not none -%}
+                    <option disabled="disabled">{{ separator }}</option>
+                {%- endif -%}
+            {%- endif -%}
+            {%- set options = choices -%}
+            {{- block('choice_widget_options') -}}
+        </select>
+    </div>
+
+{% endblock %}
+
+{# checkbox #}
+{% block checkbox_widget %}
+    <div class="form-group">
+        <div class="checkbox">
+            <label class="form-checkbox form-normal form-primary form-text active">
+                {{ label }} {{ parent() }}</label>
+        </div>
+    </div>
+{% endblock %}
+
+{% block integer_widget %}
+    <div class="form-group">
+        <label class="control-label">{{ label }}
+            {% if required %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        {% set type = type|default('number') %}
+        <input type="{{ type }}" class="form-control input-lg" {{ block('widget_attributes') }}
+                {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endblock %}
+
+{% block date_widget %}
+    <div class="form-group">
+        <label class="control-label">{{ label }}</label>
+        <div class="input-group date">
+            {% set type = type|default('date') %}
+            <input type="{{ type }}" class="form-control input-sm" {{ block('widget_attributes') }}
+                    {% if value is not empty %}value="{{ value }}" {% endif %}/>
+            <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block _custom_country_widget %}
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label">{{ label }}
+                    {% if required %}
+                        <span class="text-danger">*</span>
+                    {% endif %}
+                </label>
+                {%- if required and placeholder is none and not placeholder_in_choices and not multiple and (attr.size is not defined or attr.size <= 1) -%}
+                    {% set required = false %}
+                {%- endif -%}
+                <select class="form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+                    {%- if placeholder is not none -%}
+                        <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</option>
+                    {%- endif -%}
+                    {%- if preferred_choices|length > 0 -%}
+                        {% set options = preferred_choices %}
+                        {{- block('choice_widget_options') -}}
+                        {%- if choices|length > 0 and separator is not none -%}
+                            <option disabled="disabled">{{ separator }}</option>
+                        {%- endif -%}
+                    {%- endif -%}
+                    {%- set options = choices -%}
+                    {{- block('choice_widget_options') -}}
+                </select>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block file_widget %}
+    {% spaceless %}
+        <div class="form-group">
+            {% set type = type|default('file') %}
+            <input type="{{ type }}"
+                   class="form-control input-lg" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        </div>
+        {% if image_url is not null %}
+            <img src="{{ asset(image_url | imagine_filter('standard_200_200')) }}" width="" height="" style="margin-top: -10px; margin-bottom: 20px;"/>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+
+
+{%- block hidden_row -%}
+    <div style="display:none">
+        {{ form_widget(form) }}
+    </div>
+{%- endblock hidden_row -%}

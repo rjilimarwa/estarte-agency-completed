@@ -1,0 +1,39 @@
+{# form_theme doit etre declaré avant form_erros #}
+{% form_theme form 'backOffice/form/base_form.html.twig' %}
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <!--Modal header-->
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title text-center">Modifier une catégorie</h4>
+        </div>
+
+        <!--Modal body-->
+        <div class="modal-body">
+            <div class="modal-body">
+
+                <div class="block-erreurs"></div>
+
+                <form class="form-edit-ajax" method="post" data-entity-id="{{ entity.id }}"
+                      action="{{ path('back_category_edit', {'id': entity.id}) }}"
+                      enctype="multipart/form-data">
+
+                    {{ include('backOffice/category/form_content.html.twig') }}
+
+                </form>
+            </div>
+
+            <!--Modal footer-->
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-primary" type="button">
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

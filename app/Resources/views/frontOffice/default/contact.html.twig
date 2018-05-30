@@ -1,0 +1,131 @@
+{% extends 'frontOffice/base.html.twig' %}
+{% block title %}Contactez-nous - {{ parent() }}{% endblock %}
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1>Contact</h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Contactez-nous</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
+
+    <!-- Contact body start -->
+    <div class="contact-body">
+        <div class="container">
+            <!-- Main title -->
+            <div class="main-title">
+                <h1>Besoin d'aide ?</h1>
+                <div class="border">
+                    <div class="border-inner"></div>
+                </div>
+                <p>Vous souhaitez demander une proposition de notre part. S'il vous plaît laissez nous un message et
+                    notre consultant vous contactera</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                    <!-- Contact form start -->
+                    <div class="contact-form contact-colmun">
+                        <form method="post" id="contactForm" name="sentMessage" novalidate="" class="form-contact-ajax">
+                            <div class="row">
+                                <div id="messageContactResult" class="col-lg-12"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Nom et prénom</label>
+                                        {{ form_widget(form.fullName, {'attr': {'class': 'input-text form-control', 'placeholder': 'Nom et prénom'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        {{ form_widget(form.email, {'attr': {'class': 'input-text form-control', 'placeholder': 'Email'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Tél</label>
+                                        {{ form_widget(form.phone, {'attr': {'class': 'input-text form-control', 'placeholder': 'Tél'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Sujet</label>
+                                        {{ form_widget(form.subject, {'attr': {'class': 'input-text form-control', 'placeholder': 'Sujet'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Message</label>
+                                        {{ form_widget(form.message, {'attr': {'class': 'input-text form-control', 'placeholder': 'Nom et prénom', 'rows': '4'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group send-btn">
+                                        <button type="submit" class="button-md button-theme">Envoyer Message</button>
+                                    </div>
+                                </div>
+                                {{ form_rest((form)) }}
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Contact form end -->
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <!-- Contact details start -->
+                    <div class="contact-details">
+                        {#<div class="media">
+                            <div class="media-left">
+                                <i class="fa fa-map-marker"></i>
+                            </div>
+                            <div class="media-body">
+                                <h4>Adresse de bureau</h4>
+                                <p>Lorem Ipsum is simply dummy text printing and type setting industry 5562. po alpu</p>
+                            </div>
+                        </div>#}
+                        <div class="media">
+                            <div class="media-left">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="media-body">
+                                <h4>Téléphone</h4>
+                                <p>
+                                    Fixe: +216 31 553 901
+                                </p>
+                                <p>
+                                    Portable: +216 95 631 100
+                                </p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="media-body">
+                                <h4>Adresse Email</h4>
+                                <p>
+                                    <a href="mailto:contact@immobiliere.tn">contact@immobiliere.tn</a>
+                                </p>
+                                <p>
+                                    www.immobiliere.tn
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Contact details end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact body end -->
+{% endblock %}

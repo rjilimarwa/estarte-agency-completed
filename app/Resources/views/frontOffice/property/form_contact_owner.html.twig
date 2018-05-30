@@ -1,0 +1,53 @@
+<div id="form-contact-owner">
+    {% spaceless %}
+        {% if not form_contact_owner.vars.valid %}
+            <div class="alert alert-danger">
+                {{ form_errors(form_contact_owner) }}
+                {% for children in form_contact_owner.children %}
+                    {% if not children.vars.valid %}
+                        {{ form_errors(children) }}
+                    {% endif %}
+                    {% for child in children %}
+                        {% if not child.vars.valid %}
+                            {{ form_errors(child) }}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+
+    <div class="alert alert-success" id="resultContact" style="display: none"></div>
+
+    {% set msgVal = 'Je suis intéressé par cette annonce [ID '~ entity.ref|title~'] et j\'aimerais avoir plus de détails.' %}
+    <form class="collapse form-contact-owner" id="agent-form"
+          action="{{ path('front_property_contact_owner', {'id': entity.id}) }}" method="POST">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group full-name">
+                    {{ form_widget(form_contact_owner.fullName, { 'attr': {'class': 'input-text', 'placeholder': 'Nom et prénom'}} ) }}
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group enter-email">
+                    {{ form_widget(form_contact_owner.email, { 'attr': {'class': 'input-text', 'placeholder': 'Email'}} ) }}
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group number">
+                    {{ form_widget(form_contact_owner.phone, { 'attr': {'class': 'input-text', 'placeholder': 'Téléphone'}} ) }}
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group message">
+                    {{ form_widget(form_contact_owner.message, {'value': msgVal, 'attr': {'class': 'input-text'}}) }}
+                </div>
+            </div>
+            {{ form_rest(form_contact_owner) }}
+            <div class="col-lg-12">
+                <button type="submit" class="button-md button-theme btn-block">Envoyer Message
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

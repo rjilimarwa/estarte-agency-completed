@@ -1,0 +1,27 @@
+back_registration_list:
+    path:     /{interval}
+    defaults: { _controller: AppBundle:BackOffice\RegistrationBack:list}
+
+back_registration_archived:
+    path:     /liste/archive
+    defaults: { _controller: AppBundle:BackOffice\RegistrationBack:archived}
+
+back_registration_show:
+    path:     /voir/{id}
+    defaults: { _controller: AppBundle:BackOffice\RegistrationBack:show}
+
+back_registration_delete:
+    path:     /supprimer/{id}
+    defaults: { _controller: AppBundle:BackOffice\RegistrationBack:delete}
+    methods:   [POST]
+    options:
+        expose: true
+
+back_registration_show_validate_form:
+    path:     /validation/{id}
+    defaults: { _controller: AppBundle:BackOffice\RegistrationBack:validateForm}
+
+back_registration_search:
+    path:     /cherche
+    defaults: { _controller: AppBundle:BackOffice\RegistrationBack:search}
+

@@ -1,0 +1,34 @@
+back_customer_list:
+    path:     /
+    defaults: { _controller: AppBundle:BackOffice\CustomerBack:list}
+
+back_customer_show:
+    path:     /voir/{id}
+    defaults: { _controller: AppBundle:BackOffice\CustomerBack:show}
+
+back_customer_delete:
+    path:     /supprimer/{id}
+    defaults: { _controller: AppBundle:BackOffice\CustomerBack:delete}
+    methods:   [POST]
+    options:
+        expose: true
+
+# valider à partir de la liste des inscriptions
+back_customer_validate:
+    path:     /valider/{id}
+    defaults: { _controller: AppBundle:BackOffice\CustomerBack:validate}
+
+back_customer_enable:
+    path:     /activer/{id}
+    defaults: { _controller: AppBundle:BackOffice\CustomerBack:enable}
+    methods:   [POST]
+    options:
+        expose: true
+
+back_customer_search:
+    path:     /cherche
+    defaults: { _controller: AppBundle:BackOffice\CustomerBack:search}
+
+back_customer_renewal:
+    path:     /renouvellement/{id}
+    defaults: { _controller: AppBundle:BackOffice\CustomerBack:renewal}

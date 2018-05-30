@@ -1,0 +1,209 @@
+{% extends 'backOffice/base.html.twig' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">Annonces</li>
+{% endblock breadcrumb %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Liste des annonces</h3>
+                </div>
+
+                {#{{ render(controller('AppBundle:BackOffice/PropertyBack:searchForm')) }}#}
+
+                <!-- modal pour show -->
+                <div class="modal fade" id="myModalShow" role="dialog" tabindex="-1"
+                     aria-labelledby="demo-default-modal" aria-hidden="true">
+                </div>
+                <!-- fin modal show -->
+
+                <div class="panel-body">
+                    <main>
+                        <div id="load-ajax">
+                            <table
+                                    class="table table-hover table-vcenter toggle-circle table-striped breakpoint footable">
+                                <caption>Resultat: {{ entities.getTotalItemCount }} </caption>
+                                <thead>
+                                <tr>
+                                    <th class="col-lg-1">Image</th>
+                                    <th class="col-lg-2">Par</th>
+                                    <th class="col-lg-1">Catégorie</th>
+                                    <th class="col-lg-2">Lieu</th>
+                                    <th class="col-lg-1 text-center">Crée le</th>
+                                    <th class="col-lg-1 text-center">En ligne</th>
+                                    <th class="col-lg-1 text-center">Etat</th>
+                                    <th class="col-lg-1">&nbsp;</th>
+                                    <th class="col-lg-2 text-center" data-sort-ignore="true">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr id="new-element"></tr>
+                                {% for entity in entities %}
+                                    <tr class="item-to-hide">
+                                        <td href="{{ path('back_property_show', {'id': entity.id}) }}"
+                                            data-remote="false" data-toggle="modal"
+                                            data-target="#myModalShow" class="with-loader">
+                                            <img src="{{ asset(entity.image.webPath|imagine_filter('standard_80_80')) }}">
+                                        </td>
+                                        <td href="{{ path('back_user_show', {'id': entity.user.id}) }}"
+                                            data-remote="false" data-toggle="modal"
+                                            data-target="#myModalShow" class="with-loader">
+                                            {{ entity.user.uniqueName|title }}
+                                        </td>
+                                        <td href="{{ path('back_property_show', {'id': entity.id}) }}"
+                                            class="with-loader"
+                                            data-remote="false" data-toggle="modal"
+                                            data-target="#myModalShow">{{ entity.category.name|capitalize }}
+                                        </td>
+                                        <td href="{{ path('back_property_show', {'id': entity.id}) }}"
+                                            class="with-loader"
+                                            data-remote="false" data-toggle="modal"
+                                            data-target="#myModalShow">
+                                            {{ entity.city.name|capitalize }} / {{ entity.area.name|capitalize }}
+                                        </td>
+                                        <td class="text-center"
+                                            style="padding-left: 0; padding-right: 0">{{ entity.createdAt|localizeddate('medium', 'none', 'fr') }}</td>
+                                        <td class="text-center">
+                                            {% if entity.active == 1 %}
+                                                <span class="badge badge-success">oui</span>
+                                            {% else %}
+                                                <span class="badge badge-danger">Non</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            {% if entity.state == 'valid' %}
+                                                <span class="badge badge-success">
+                                                    Validé <span class="fa fa-check"></span>
+                                                </span>
+                                            {% elseif entity.state == 'waiting' %}
+                                                <span class="badge badge-warning">
+                                                    En attente <span class="fa fa-hourglass-half"></span>
+                                                </span>
+                                            {% elseif entity.state == 'rejected' %}
+                                                <span class="badge badge-danger">
+                                                    Rejeté <span class="fa fa-minus-circle"></span>
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="inline position-relative">
+                                                <button data-toggle="dropdown"
+                                                        class="btn btn-xs btn-primary dropdown-toggle dropdown-toggle-icon"
+                                                        type="button" aria-expanded="false">
+                                                    Action <i class="dropdown-caret fa fa-caret-down"></i>
+                                                </button>
+
+                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow
+                                                    pull-right dropdown-caret dropdown-close">
+                                                    {% if entity.state == "rejected" or entity.state == "waiting" %}
+                                                        <li class="text-center">
+                                                            <a href="{{ path('back_property_valid', {'token': entity.token}) }}"
+                                                               class="add-tooltip tooltip-info with-loader"
+                                                               data-placement="left" data-original-title="Valider">
+                                                                <i class="fa fa-check text-success bigger-130"></i>
+                                                                Valider
+                                                            </a>
+                                                        </li>
+                                                    {% else %}
+                                                        <li class="text-center">
+                                                            <a href="{{ path('back_property_reject', {'token': entity.token}) }}"
+                                                               class="add-tooltip tooltip-error reject-item"
+                                                               data-placement="left" data-toggle="tooltip"
+                                                               data-original-title="Réjeter">
+                                                                <i class="fa fa-minus-circle text-danger bigger-130"></i>
+                                                                Réjeter
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                    <li class="text-center">
+                                                        <a href="{{ path('back_property_edit', {'id': entity.id}) }}"
+                                                           class="add-tooltip tooltip-info"
+                                                           data-placement="left" data-toggle="tooltip"
+                                                           data-original-title="Editer">
+                                                            <i class="fa fa-pencil text-info bigger-130"></i>
+                                                            Editer
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="action-buttons">
+                                                <a href="{{ path('back_property_show', {'id': entity.id}) }}"
+                                                   data-remote="false" data-toggle="modal"
+                                                   data-target="#myModalShow"
+                                                   class="add-tooltip tooltip-info with-loader"
+                                                   data-placement="top" data-original-title="Voir">
+                                                    <i class="fa fa-eye text-info bigger-130"></i>
+                                                </a>
+                                                &nbsp;
+                                                <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}"
+                                                   class="add-tooltip tooltip-info" target="_blank"
+                                                   data-placement="top" data-original-title="Lien">
+                                                    <i class="fa fa-link text-info bigger-130"></i>
+                                                </a>
+                                                &nbsp;
+                                                <a href="{{ path('back_property_delete', {'token': entity.token}) }}"
+                                                   data-entity-id="{{ entity.id }}"
+                                                   class="add-tooltip tooltip-error remove-item"
+                                                   data-placement="top" data-toggle="tooltip"
+                                                   data-original-title="Supprimer">
+                                                    <i class="fa fa-trash text-danger bigger-130"></i>
+                                                </a>
+                                            </div>
+
+                                            <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                <div class="inline position-relative">
+                                                    <button data-toggle="dropdown"
+                                                            class="btn btn-xs btn-primary dropdown-toggle dropdown-toggle-icon"
+                                                            type="button" aria-expanded="false"><i
+                                                                class="dropdown-caret fa fa-caret-down"></i>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow
+                                                    pull-right dropdown-caret dropdown-close">
+                                                        <li class="text-center">
+                                                            <a href="{{ path('back_property_show', {'id': entity.id}) }}"
+                                                               data-remote="false" data-toggle="modal"
+                                                               data-target="#myModalShow"
+                                                               class="add-tooltip tooltip-info"
+                                                               data-placement="left" data-original-title="Voir">
+                                                                <i class="fa fa-eye text-primary bigger-130"></i>
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="{{ path('back_property_delete', {'token': entity.token}) }}"
+                                                               class="add-tooltip tooltip-error remove-item"
+                                                               data-placement="left" data-toggle="tooltip"
+                                                               data-original-title="Supprimer">
+                                                                <span class="red">
+                                                                    <i class="fa fa-trash text-danger bigger-130"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <div class="dataTables_paginate paging_simple_numbers">
+                                {{ knp_pagination_render(entities) }}
+                            </div>
+                        </div>
+                    </main>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

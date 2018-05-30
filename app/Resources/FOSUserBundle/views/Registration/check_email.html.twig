@@ -1,0 +1,28 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Creat account start -->
+    <div class="submit-property">
+        <div class="container">
+            <div class="row">
+                <div class="main-title">
+                    <h1>Confirmation par email</h1>
+                    <div class="border">
+                        <div class="border-inner"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-2 col-sm-offset-2">
+                    <br>
+                    <div class="notification-box">
+                        <p>
+                        <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

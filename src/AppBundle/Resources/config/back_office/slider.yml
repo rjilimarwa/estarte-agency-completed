@@ -1,0 +1,29 @@
+back_slider_list:
+    path:     /
+    defaults: { _controller: AppBundle:BackOffice\SliderBack:list}
+
+back_slider_new:
+    path:     /creer
+    defaults: { _controller: AppBundle:BackOffice\SliderBack:new}
+
+back_slider_show:
+    path:     /voir/{id}
+    defaults: { _controller: AppBundle:BackOffice\SliderBack:show}
+
+back_slider_edit:
+    path:     /modifier/{id}
+    defaults: { _controller: AppBundle:BackOffice\SliderBack:edit}
+
+back_slider_delete:
+    path:     /supprimer/{id}
+    defaults: { _controller: AppBundle:BackOffice\SliderBack:delete}
+    methods:   [POST]
+    options:
+        expose: true
+
+back_slider_active:
+    path:     /publier/{id}
+    defaults: { _controller: AppBundle:BackOffice\SliderBack:active}
+    methods:   [POST]
+    options:
+        expose: true

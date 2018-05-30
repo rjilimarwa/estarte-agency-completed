@@ -1,0 +1,51 @@
+<div class="panel-body">
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_widget(form.description, {'attr': {'maxlength': '70'}} ) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {% if entity is defined %}
+                {% set color = entity.color|default('#ffffff') %}
+            {% else %}
+                {% set color = "#ffffff" %}
+            {% endif %}
+            <div class="form-group">
+                <label class="control-label">Couleur titre</label>
+                <input type="color" class="form-control input-lg" id="color" name="color" value="{{ color }}" style="height: 60px;">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_widget(form.active) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            {{ form_widget(form.file) }}
+        </div>
+        <div class="col-md-4">
+            <img id="target" width="300"/>
+        </div>
+    </div>
+    {{ form_rest(form) }}
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <span class="loading">
+            <i class="fa fa-spinner fa-pulse text-primary fa-4x" aria-hidden="true"></i>
+        </span>
+        <button class="btn btn-info btn-labeled fa fa-save fa-lg" type="submit"
+                onsubmit=" return false;">Enregistrer
+        </button>
+        &nbsp;&nbsp;
+        <button type="reset" class="btn btn-warning btn-labeled fa fa-repeat fa-lg" id="reset">
+            Réinstaller
+        </button>
+    </div>
+</div>

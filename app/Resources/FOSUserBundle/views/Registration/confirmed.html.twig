@@ -1,0 +1,34 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+
+    <!-- Creat account start -->
+    <div class="submit-property">
+        <div class="container">
+            <div class="row">
+                <div class="main-title">
+                    <h1>Confirmation</h1>
+                    <div class="border">
+                        <div class="border-inner"></div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+                    <div class="notification-box">
+                        <h3>Bienvenue</h3>
+                        <p style="font-size: 15px;">VOTRE COMPTE EST MAINTENANT ACTIVÉ
+                            &nbsp;<a href="{{ path('fos_user_profile_show') }}"><strong class="base-color">Voir
+                                    profil</strong></a>
+                        </p>
+                        {% if targetUrl %}
+                            <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock body %}

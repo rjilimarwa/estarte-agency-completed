@@ -1,0 +1,95 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1>Mon compte</h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Mon profil</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
+
+    <!-- My profile start -->
+    <div class="my-profile">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4">
+                    <!-- My account box start -->
+                    {{ include('@FOSUser/Profile/left_side_bar.html.twig') }}
+                    <!-- My account box end -->
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-5">
+                    <!-- My address start-->
+                    <div class="my-address detail">
+                        <h1>Mon compte</h1>
+                        <p>
+                            <strong>Nom: </strong> {{ app.user.particular.lastName|title }}
+                        </p>
+                        <p>
+                            <strong>Prénom: </strong> {{ app.user.particular.firstName|title }}
+                        </p>
+                        <p>
+                            <strong>Civilité: </strong> {{ app.user.particular.civility|title }}
+                        </p>
+                        <p>
+                            <strong>Email: </strong> {{ app.user.email }}
+                        </p>
+                        <p>
+                            <strong>Tél mobile: </strong> {{ app.user.particular.mobile }}
+                        </p>
+                        <p>
+                            <strong>Tél fixe: </strong> {{ app.user.particular.phone }}
+                        </p>
+                        <p>
+                            <strong>Adresse: </strong> {{ app.user.particular.address|capitalize }}
+                        </p>
+                        <p>
+                            <strong>Code postal: </strong> {{ app.user.particular.postCode }}
+                        </p>
+                        <p>
+                            <strong>Ville: </strong> {{ app.user.city.name|default('')|title }}
+                        </p>
+                        <p>
+                            <strong>Région: </strong> {{ app.user.area.name|default('')|title }}
+                        </p>
+                        <p>
+                            <strong>Date inscription: </strong> {{ app.user.createdAt|date('d/m/Y à H:i') }}
+                        </p>
+                        <p>
+                            <strong>Dérnier connexion le: </strong> {{ app.user.lastLogin|date('d/m/Y à H:i') }}
+                        </p>
+                    </div>
+                    <!-- My address end -->
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <!-- Avatar start -->
+                    {#<div class="edit-profile-photo">
+                        <img src="{{ asset(app.user.particular.logo.webPath) }}" alt="{{ app.user.particular.firstName }}" class="img-responsive">
+                        <div class="change-photo-btn">
+                            <div class="photoUpload">
+                                <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                <input type="file" class="upload">
+                            </div>
+                        </div>
+                    </div>#}
+                    <!-- Avatar end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- My profile end -->
+
+
+{% endblock %}

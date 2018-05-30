@@ -1,0 +1,93 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <!--Modal header-->
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title text-center">{{ entity.title|title }}</h4>
+        </div>
+
+        <!--Modal body-->
+        <div class="modal-body">
+            <table class="table table-striped">
+                <tr>
+                    <td class="td-title">Par:</td>
+                    <td class="td-val"><strong>{{ entity.user.uniqueName|title }}</strong></td>
+                </tr>
+                <tr>
+                    <td class="td-title">Réf:</td>
+                    <td class="td-val">{{ entity.ref|upper }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Titre:</td>
+                    <td class="td-val">{{ entity.title|capitalize }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Catégorie:</td>
+                    <td class="td-val">{{ entity.category.name|capitalize }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Lieu:</td>
+                    <td class="td-val">{{ entity.city.name|capitalize }} / {{ entity.area.name|capitalize }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Prix:</td>
+                    <td class="td-val"><strong>{{ entity.price|number_format(0, ' ', ' ')~' DT' }}</strong></td>
+                </tr>
+                <tr>
+                    <td class="td-title">En ligne:</td>
+                    <td class="td-val">
+                        {% if entity.active == 1 %}
+                            <span class="badge badge-success">En ligne</span>
+                        {% else %}
+                            <span class="badge badge-danger">Pas en ligne</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-title">Etat:</td>
+                    <td class="td-val">
+                        {% if entity.state == 'valid' %}
+                            <span class="badge badge-success">
+                                Validé <span class="fa fa-check"></span>
+                            </span>
+                        {% elseif entity.state == 'waiting' %}
+                            <span class="badge badge-warning">
+                                En attente <span class="fa fa-hourglass-half"></span>
+                            </span>
+                        {% elseif entity.state == 'rejected' %}
+                            <span class="badge badge-danger">
+                                Rejeté <span class="fa fa-minus-circle"></span>
+                            </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-title">Nb vues:</td>
+                    <td class="td-val">{{ entity.countViews }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Ajouté le:</td>
+                    <td class="td-val">{{ entity.createdAt|localizeddate('medium', 'none', 'fr') }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Déscription:</td>
+                    <td class="td-val">{{ entity.description|nl2br }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Image:</td>
+                    <td class="td-val"><img src="{{ asset(entity.image.webPath|imagine_filter('standard_200_200')) }}" class="img-responsive"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!--Modal footer-->
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-primary" type="button">
+                Fermer
+            </button>
+        </div>
+    </div>
+</div>
+

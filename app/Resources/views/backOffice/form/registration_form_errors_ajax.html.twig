@@ -1,0 +1,16 @@
+<div class="block-erreurs">
+    {% spaceless %}
+        {% if not form.vars.valid %}
+            <div class="alert alert-danger fade in">
+                <button class="close" data-dismiss="alert"><span>×</span></button>
+                {{ form_errors(form) }}
+                {% for children in form.children %}
+                    {% if not children.vars.valid %}
+                        {{ form_errors(children) }}
+                    {% endif %}
+                {% endfor %}
+                {{ form_errors(form.plainPassword.first) }}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+</div>

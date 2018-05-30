@@ -1,0 +1,23 @@
+back_activity_list:
+    path:     /
+    defaults: { _controller: AppBundle:BackOffice\ActivityBack:list}
+
+back_activity_new:
+    path:     /creer
+    defaults: { _controller: AppBundle:BackOffice\ActivityBack:new}
+
+back_activity_edit:
+    path:     /modifier/{id}
+    defaults: { _controller: AppBundle:BackOffice\ActivityBack:edit}
+
+back_activity_delete:
+    path:     /supprimer/{id}
+    defaults: { _controller: AppBundle:BackOffice\ActivityBack:delete}
+    methods:   [POST]
+    options:
+        expose: true
+
+back_activity_search:
+    path:     /cherche
+    defaults: { _controller: AppBundle:BackOffice\ActivityBack:search}
+

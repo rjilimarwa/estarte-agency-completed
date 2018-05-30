@@ -1,0 +1,34 @@
+<?php
+
+namespace AppBundle\Form\Area;
+
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class AreaEditType extends AreaType
+{
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'AppBundle\Entity\Area',
+        ));
+    }
+
+
+    public function getBlockPrefix()
+    {
+        return null;
+    }
+
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+}

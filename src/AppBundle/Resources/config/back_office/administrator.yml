@@ -1,0 +1,25 @@
+back_administrator_list:
+    path:     /
+    defaults: { _controller: AppBundle:BackOffice\AdministratorBack:list}
+
+back_administrator_new:
+    path:     /new
+    defaults: { _controller: AppBundle:BackOffice\AdministratorBack:new}
+
+back_administrator_edit:
+    path:     /edit/{id}
+    defaults: { _controller: AppBundle:BackOffice\AdministratorBack:edit}
+
+back_administrator_delete:
+    path:     /delete/{id}
+    defaults: { _controller: AppBundle:BackOffice\AdministratorBack:delete}
+    methods:   [POST]
+    options:
+        expose: true
+
+back_administrator_enable:
+    path:     /lock/{id}
+    defaults: { _controller: AppBundle:BackOffice\AdministratorBack:enable}
+    methods:   [POST]
+    options:
+        expose: true

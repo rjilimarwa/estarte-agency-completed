@@ -1,0 +1,43 @@
+back_product_list:
+    path:     /
+    defaults: { _controller: AppBundle:BackOffice\ProductBack:list}
+
+back_product_new:
+    path:     /creer
+    defaults: { _controller: AppBundle:BackOffice\ProductBack:new}
+
+back_product_show:
+    path:     /voir/{id}
+    defaults: { _controller: AppBundle:BackOffice\ProductBack:show}
+
+back_product_edit:
+    path:     /modifier/{id}
+    defaults: { _controller: AppBundle:BackOffice\ProductBack:edit}
+
+back_product_delete:
+    path:     /supprimer/{id}
+    defaults: { _controller: AppBundle:BackOffice\ProductBack:delete}
+    methods:   [POST]
+    options:
+        expose: true
+
+back_product_active:
+    path:     /publier/{id}
+    defaults: { _controller: AppBundle:BackOffice\ProductBack:active}
+    methods:   [POST]
+    options:
+        expose: true
+
+back_product_search:
+    path:     /cherche
+    defaults: { _controller: AppBundle:BackOffice\ProductBack:search}
+
+back_product_form_new:
+    path:     /form-new
+    defaults: { _controller: AppBundle:BackOffice\ProductBack:newForm}
+    methods:   [POST]
+
+back_product_form_search:
+    path:     /form-search
+    defaults: { _controller: AppBundle:BackOffice\ProductBack:searchForm}
+    methods:   [POST]

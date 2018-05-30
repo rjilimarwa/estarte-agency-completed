@@ -1,0 +1,144 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1>Mon compte</h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Mes favoris</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
+
+    <!-- My Propertiess start -->
+    <div class="my-propertiess">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-4">
+                <!-- My account box start -->
+                {{ include('@FOSUser/Profile/left_side_bar.html.twig') }}
+                <!-- My account box end -->
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-8">
+                <h1 class="heading">Mes favoris</h1>
+                <div class="row">
+                    {% for entity in entities %}
+                        <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInUp delay-03s">
+                            <!-- Recent properties box start -->
+                            <div class="thumbnail recent-properties-box">
+                                <a href="{{ path('front_office_property_show', {'slug': entity.property.slug}) }}">
+                                    <img src="{{ asset(entity.property.image.webPath|imagine_filter('standard_850_592')) }}"
+                                         alt="properties-1" class="img-responsive">
+                                </a>
+                                <!-- Detail -->
+                                <div class="caption detail">
+                                    <!-- Header -->
+                                    <header>
+                                        <div class="pull-left">
+                                            <h1 class="title" style="font-size: 13px;">
+                                                <a href="{{ path('front_office_property_show', {'slug': entity.property.slug}) }}">
+                                                    {{ entity.property.category.name~' '~entity.property.operation.title }}
+                                                </a>
+                                            </h1>
+                                        </div>
+                                        <!-- Price -->
+                                        <div class="price" style="font-size: 13px">
+                                            {% if entity.property.displayPrice %}{{ entity.property.price~' DT' }} {% if entity.property.operation.alias == 'loc' %}/ mois {% endif %}
+                                            {% else %}
+                                                &nbsp;
+                                            {% endif %}
+                                        </div>
+                                    </header>
+                                    <!-- Location -->
+                                    <h3 class="location">
+                                        <a href="{{ path('front_office_property_show', {'slug': entity.property.slug}) }}">
+                                            <i class="fa fa-map-marker"></i>{{ entity.property.city.name~', '~entity.property.area.name }}
+                                        </a>
+                                    </h3>
+                                    <!-- Facilities List -->
+                                    <ul class="facilities-list clearfix">
+                                        <li class="bordered-right">
+                                            <i class="fa fa-map-marker"></i> {{ entity.property.situation.name|capitalize }}
+                                        </li>
+                                        <li class="bordered-right">
+                                            <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
+                                            <span>{{ entity.property.floorArea }} m<sup>2</sup></span>
+                                        </li>
+                                        {% if entity.property.roomNumber != 0 or entity.property.roomNumber != null %}
+                                            <li>
+                                                <i class="flaticon-bed"></i>&nbsp;<span>{{ entity.property.roomNumber }}
+                                                    chambres</span>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                    <p class="text-center margin-t-5">
+                                        <a id="add-fav-{{ entity.id }}"
+                                           class="text-13 text-base-color add-to-favorite add-fav"
+                                           data-toggle="tooltip"
+                                           title="Ajouter au liste des favoris"
+                                           data-target="{{ path('front_favorite_new', {'token': entity.property.token}) }}"
+                                           data-entity-id="{{ entity.id }}"
+                                           style="display: none">
+                                            <i class="fa fa-heart text-danger"></i> Ajouter aux favoris
+                                        </a>
+                                        <a id="remove-fav-{{ entity.id }}"
+                                           class="text-13 text-danger add-to-favorite remove-fav"
+                                           data-toggle="tooltip"
+                                           title="Retirer de la liste des favoris"
+                                           data-target="{{ path('front_favorite_remove', {'token': entity.property.token}) }}"
+                                           data-entity-id="{{ entity.id }}"
+                                           style="display: inline">
+                                            <i class="fa fa-heart" style="color: indianred"></i> Supprimer de favoris
+                                        </a>
+                                    </p>
+                                    <!-- Footer -->
+                                    <div class="footer">
+                                        <a href="#">
+                                            <i class="fa fa-user"></i> {{ entity.property.user.uniqueName|title }}
+                                        </a>
+                                        <span>
+                                        <i class="fa fa-calendar-o"></i> {{ entity.property.createdAt|localizeddate('medium', 'none', 'fr') }}
+                                    </span>
+                                    </div>
+                                </div>
+                                <!-- Tag -->
+                                <span class="tag-f">
+                                <a href="{{ path('front_office_property_show', {'slug': entity.property.slug}) }}">
+                                    {{ entity.property.ref|upper }}
+                                </a>
+                            </span>
+                                {#<span class="tag-s">
+                                    <a href="properties-details.html">For Sale</a>
+                                </span>#}
+                            </div>
+                            <!-- Recent properties box end -->
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <p class="text-13"> 0 résultat trouvé!</p>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Page navigation start -->
+                <nav aria-label="Page navigation">
+                    {{ knp_pagination_render(entities) }}
+                </nav>
+                <!-- Page navigation end-->
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

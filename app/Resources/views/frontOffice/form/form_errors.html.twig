@@ -1,0 +1,19 @@
+<div class="block-erreurs">
+    {% spaceless %}
+        {% if not form.vars.valid %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+                {% for children in form.children %}
+                    {% if not children.vars.valid %}
+                        {{ form_errors(children) }}
+                    {% endif %}
+                    {% for child in children %}
+                        {% if not child.vars.valid %}
+                            {{ form_errors(child) }}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+</div>

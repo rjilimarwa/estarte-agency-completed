@@ -1,0 +1,262 @@
+{% extends 'backOffice/base.html.twig' %}
+
+{% form_theme form 'backOffice/form/base_form.html.twig' %}
+
+{% block page_title %}Gestion des annonces{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">Annonces</li>
+{% endblock breadcrumb %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Modifier une annonce</h3>
+                </div>
+
+                <form method="post" action="{{ path('back_property_edit', {'id': entity.id}) }}"
+                      enctype="multipart/form-data">
+
+                    <div class="panel-body">
+
+                        <div class="row" style="margin-bottom: 50px;">
+                            <div class="col-sm-12 text-center">
+                <span class="loading">
+                    <i class="fa fa-spinner fa-pulse text-primary fa-4x" aria-hidden="true"></i>
+                </span>
+                                <button type="submit" class="btn btn-info btn-labeled fa fa-save fa-lg"
+                                        name="submit">
+                                    Enregistrer
+                                </button>
+
+                                &nbsp;&nbsp;
+                                <button type="reset" class="btn btn-warning btn-labeled fa fa-repeat fa-lg" id="">
+                                    Réinstaller
+                                </button>
+                            </div>
+                            <input type="hidden" name="referer" value="{{ referer }}">
+                        </div>
+                        {{ include('backOffice/form/form_errors.html.twig') }}
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.operation, { 'attr': {'class': 'selectpickers search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': 'Chercher région'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.category, { 'attr': {'class': 'selectpickers search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': 'Chercher région'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.city, { 'attr': {'class': 'selectpickerr search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': ''}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.area, { 'attr': {'class': 'selectpickers search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': ''}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.situation, { 'attr': {'class': 'selectpickers search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': ''}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.title, { 'attr': {'class': 'input-text'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.description, { 'attr': {'class': 'input-text'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.price, { 'attr': {'class': 'input-text'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                <br>
+                                <div class="checkbox checkbox-theme checkbox-circle">
+                                    {{ form_widget(form.displayPrice, { 'attr': {'class': ''}} ) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.floorArea, { 'attr': {'class': 'input-text'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.plotArea, { 'attr': {'class': 'input-text'}} ) }}
+                            </div>
+                        </div>
+                        <br clear="left">
+
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.roomNumber, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.livingRoomNumber, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.bathRoomNumber, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.kitchenNumber, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.terrace, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.floorNumber, { 'attr': {'class': 'selectpicker search-fields'}} ) }}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="row features">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pad-lft-0">
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.balcony, { 'attr': {'class': ''}} ) }}
+                                    </div>
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.garden, { 'attr': {'class': ''}} ) }}
+                                    </div>
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.garage, { 'attr': {'class': ''}} ) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pad-lft-0">
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.parking, { 'attr': {'class': ''}} ) }}
+                                    </div>
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.elevator, { 'attr': {'class': ''}} ) }}
+                                    </div>
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.heating, { 'attr': {'class': ''}} ) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pad-lft-0">
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.airConditioner, { 'attr': {'class': ''}} ) }}
+                                    </div>
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.alarmSystem, { 'attr': {'class': ''}} ) }}
+                                    </div>
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.wifi, { 'attr': {'class': ''}} ) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pad-lft-0">
+                                    <div class="checkbox checkbox-theme checkbox-circle">
+                                        {{ form_widget(form.swimmingPool, { 'attr': {'class': ''}} ) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                <h4>Image principal</h4>
+                                <div class="checkbox checkbox-theme checkbox-circle">
+                                    {{ form_widget(form.active, { 'attr': {'class': ''}} ) }}
+                                </div>
+                            </div>
+                        </div>
+                        <br clear="left">
+                        <div class="col-lg-6 col-md-36 col-sm-6 col-xs-12 pad-lft-0">
+                            <div class="">
+                                {{ form_widget(form.image, { 'attr': {'class': ''}} ) }}
+                            </div>
+                        </div>
+                        <br clear="left">
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <h4>Photos</h4>
+                            <ul class="add-files"
+                                data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}">
+                                {% for element in form.photos %}
+                                    <li>
+                                        {{ form_widget(element) }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="row">
+                            {{ form_rest(form) }}
+                        </div>
+
+                        <div class="row" style="margin-top: 50px;">
+                            <div class="col-sm-12 text-center">
+                <span class="loading">
+                    <i class="fa fa-spinner fa-pulse text-primary fa-4x" aria-hidden="true"></i>
+                </span>
+                                <button type="submit" class="btn btn-info btn-labeled fa fa-save fa-lg"
+                                        name="submit">
+                                    Enregistrer
+                                </button>
+
+                                &nbsp;&nbsp;
+                                <button type="reset" class="btn btn-warning btn-labeled fa fa-repeat fa-lg" id="">
+                                    Réinstaller
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#<script type="text/javascript" src="{{ asset('frontOffice/upload-multiple.js') }}"></script>#}
+    <script>
+        var $city = $('#property_city');
+        // When sport gets selected ...
+        $city.change(function () {
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('form');
+            // Simulate form data, but only include the selected sport value.
+            var data = {};
+            data[$city.attr('name')] = $city.val();
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url: "{{ path('front_my_properties_new') }}",
+                type: 'POST',
+                data: data,
+                success: function (html) {
+                    // Replace current position field ...
+                    $('#property_area').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#property_area')
+                    );
+                    // Position field now displays the appropriate positions.
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Creat account start -->
+    <div class="submit-property">
+        <div class="container">
+            <div class="row">
+                <div class="main-title">
+                    <h1>{{ 'resetting.request.submit'|trans|capitalize }}</h1>
+                    <div class="border">
+                        <div class="border-inner"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-2 col-sm-offset-2">
+                    <br>
+                    <div class="notification-box">
+                        <p>
+                        {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

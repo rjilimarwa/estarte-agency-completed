@@ -1,0 +1,135 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_widget_simple %}
+    <div class="form-group">
+        <label class="control-label">{{ label }}
+            {% if required %}
+                <span class="text-danger">*</span>
+            {% endif %}
+        </label>
+        {% set type = type|default('text') %}
+        <input type="{{ type }}"
+               class="form-control input-lg" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endblock %}
+
+
+{# choice#}
+{% block choice_widget_collapsed %}
+    <div class="form-group">
+        <label class="control-label">{{ label }} {% if required %}<span>*</span>{% endif %}</label>
+        {%- if required and placeholder is none and not placeholder_in_choices and not multiple and (attr.size is not defined or attr.size <= 1) -%}
+            {% set required = false %}
+        {%- endif -%}
+        <select class="form-control input-lg" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+            {%- if placeholder is not none -%}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</option>
+            {%- endif -%}
+            {%- if preferred_choices|length > 0 -%}
+                {% set options = preferred_choices %}
+                {{- block('choice_widget_options') -}}
+                {%- if choices|length > 0 and separator is not none -%}
+                    <option disabled="disabled">{{ separator }}</option>
+                {%- endif -%}
+            {%- endif -%}
+            {%- set options = choices -%}
+            {{- block('choice_widget_options') -}}
+        </select>
+    </div>
+{% endblock %}
+
+
+{% block choice_widget_expanded %}
+    <div class="form-group" style="">
+        <label class="col-md-4 control-label text-right">{{ label }} {% if required %}<span>*</span>{% endif %}</label>
+        <div class="col-md-8">
+            <div class="radio-inline">
+                {%- for child in form %}
+                    {{- form_widget(child) -}}
+                    <span class="pad-lft-5 pad-rgt-10">
+                    {{- form_label(child) }}
+                        </span>
+                {% endfor -%}
+            </div>
+            <hr class="hr-sm">
+        </div>
+    </div>
+{% endblock %}
+
+{%- block radio_widget -%}
+    <label class="form-radio form-icon form-text {% if checked %} active {% endif %}">
+        <input type="radio"
+               class="form-control" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    </label>
+{%- endblock radio_widget -%}
+
+
+
+{# checkbox #}
+{% block checkbox_widget %}
+    <div class="form-group">
+        <div class="checkbox">
+            <label class="form-checkbox form-normal form-primary form-text active">
+                {{ label }} {{ parent() }}</label>
+        </div>
+    </div>
+{% endblock %}
+
+{% block integer_widget %}
+
+    <div class="form-group">
+        <label class="control-label">{{ label }}</label>
+        {% set type = type|default('number') %}
+        <input type="{{ type }}" class="form-control input-lg" {{ block('widget_attributes') }}
+                {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+
+{% endblock %}
+
+{% block date_widget %}
+
+    <div class="form-group">
+        <label class="control-label">{{ label }}</label>
+        <div class="input-group date">
+            {% set type = type|default('date') %}
+            <input type="{{ type }}" class="form-control input-sm" {{ block('widget_attributes') }}
+                    {% if value is not empty %}value="{{ value }}" {% endif %}/>
+            <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block _custom_country_widget %}
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label">{{ label }} {% if required %}<span>*</span>{% endif %}</label>
+            {%- if required and placeholder is none and not placeholder_in_choices and not multiple and (attr.size is not defined or attr.size <= 1) -%}
+                {% set required = false %}
+            {%- endif -%}
+            <select class="form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+                {%- if placeholder is not none -%}
+                    <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</option>
+                {%- endif -%}
+                {%- if preferred_choices|length > 0 -%}
+                    {% set options = preferred_choices %}
+                    {{- block('choice_widget_options') -}}
+                    {%- if choices|length > 0 and separator is not none -%}
+                        <option disabled="disabled">{{ separator }}</option>
+                    {%- endif -%}
+                {%- endif -%}
+                {%- set options = choices -%}
+                {{- block('choice_widget_options') -}}
+            </select>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{%- block hidden_row -%}
+    <div style="display:none">
+        {{ form_widget(form) }}
+    </div>
+{%- endblock hidden_row -%}

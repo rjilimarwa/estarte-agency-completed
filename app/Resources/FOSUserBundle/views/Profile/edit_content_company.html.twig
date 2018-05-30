@@ -1,0 +1,199 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'frontOffice/form_layout/base_from.html.twig' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1>Mon compte</h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Modifier profil</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
+
+    <!-- My profile start -->
+    <div class="my-profile">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4">
+                    <!-- My account box start -->
+                    {{ include('@FOSUser/Profile/left_side_bar.html.twig') }}
+                    <!-- My account box end -->
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-5">
+                    <!-- My address start-->
+                    <div class="my-address">
+                        <h1>My Account</h1>
+
+                        {% spaceless %}
+                            {% if not form.vars.valid %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(form) }}
+                                    {% for children in form.children %}
+                                        {% if not children.vars.valid %}
+                                            {{ form_errors(children) }}
+                                        {% endif %}
+                                        {% for child in children %}
+                                            {% if not child.vars.valid %}
+                                                {{ form_errors(child) }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                    <span class="close"></span>
+                                </div>
+                            {% endif %}
+                        {% endspaceless %}
+
+                        <form action="{{ path('fos_user_profile_edit') }}" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="{{ form.email.vars.id }}">{{ 'form.email'|trans }}</label>
+                                {{ form_widget(form.email, { 'attr': {'class': 'input-text'}} ) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.company.corporateName.vars.id }}">
+                                    Raison social
+                                    <small><i>(Nom entreprise)</i></small>
+                                </label>
+                                {{ form_widget(form.company.corporateName, { 'attr': {'class': 'input-text'}} ) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.company.taxRegistrationNumber.vars.id }}">
+                                    Code TVA
+                                </label>
+                                {{ form_widget(form.company.taxRegistrationNumber, { 'attr': {'class': 'input-text form-control'}} ) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.company.address.vars.id }}">
+                                    Adresse
+                                </label>
+                                {{ form_widget(form.company.address, { 'attr': {'class': 'input-text form-control'}} ) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.company.postCode.vars.id }}">
+                                    Code Postal
+                                </label>
+                                {{ form_widget(form.company.postCode, { 'attr': {'class': 'input-text form-control'}} ) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.city.vars.id }}">
+                                    Ville
+                                </label>
+                                {{ form_widget(form.city, { 'attr': {'class': 'selectpickerr search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': 'Chercher ville'}} ) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.area.vars.id }}">
+                                    Région
+                                </label>
+                                {{ form_widget(form.area, { 'attr': {'class': 'selectpickers search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': 'Chercher région'}} ) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.company.mobile.vars.id }}">
+                                    Tél mobile
+                                </label>
+                                {{ form_widget(form.company.mobile, { 'attr': {'class': 'input-text form-control'}} ) }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.company.logo.vars.id }}">
+                                    Logo
+                                </label>
+                                {{ form_widget(form.company.logo, { 'attr': {'class': ''}} ) }}
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="{{ form.current_password.vars.id }}">{{ 'form.current_password'|trans }}</label>
+                                        {{ form_widget(form.current_password, {'attr': {'class': 'input-text form-control'}} ) }}
+                                    </div>
+                                </div>
+                                {{ form_rest(form) }}
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <button type="submit"
+                                                class="button-md button-theme">{{ 'profile.edit.submit'|trans }}</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% spaceless %}
+                                {% if not form.vars.valid %}
+                                    <div class="alert alert-danger">
+                                        {{ form_errors(form) }}
+                                        {% for children in form.children %}
+                                            {% if not children.vars.valid %}
+                                                {{ form_errors(children) }}
+                                            {% endif %}
+                                            {% for child in children %}
+                                                {% if not child.vars.valid %}
+                                                    {{ form_errors(child) }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                        <span class="close"></span>
+                                    </div>
+                                {% endif %}
+                            {% endspaceless %}
+                        </form>
+
+                    </div>
+                    <!-- My address end -->
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <!-- Avatar start -->
+                    <div class="edit-profile-photo">
+                        <img src="{{ asset(app.user.company.logo.webPath) }}" alt="{{ app.user.company.corporateName }}" class="img-responsive">
+                        {#<div class="change-photo-btn">
+                            <div class="photoUpload">
+                                <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                <input type="file" class="upload">
+                            </div>
+                        </div>#}
+                    </div>
+                    <!-- Avatar end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- My profile end -->
+
+
+    <script>
+        var $city = $('#fos_user_profile_form_city');
+        // When sport gets selected ...
+        $city.change(function () {
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('form');
+            // Simulate form data, but only include the selected sport value.
+            var data = {};
+            data[$city.attr('name')] = $city.val();
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url: $form.attr('action'),
+                type: 'POST',
+                data: data,
+                success: function (html) {
+                    console.log(html);
+                    // Replace current position field ...
+                    $('#fos_user_profile_form_area').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#fos_user_profile_form_area')
+                    );
+                    // Position field now displays the appropriate positions.
+                }
+            });
+        });
+    </script>
+{% endblock %}

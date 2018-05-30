@@ -1,0 +1,38 @@
+<div class="modal-dialog modal-md">
+    <div class="modal-content">
+        <!--Modal header-->
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title text-center">Valider inscription</h4>
+        </div>
+
+        <!--Modal body-->
+        <div class="modal-body">
+            <div class="col-lg-8 col-lg-offset-2" style="margin-bottom: 50px;">
+                <form action="{{ path('back_customer_validate', {'id': entity.id}) }}" method="post">
+                    <div class="form-group">
+                        <label for="pack">Choisir un pack</label>
+                        <select class="form-control" name="pack" id="pack" required>
+                            <option value="">--Selctionner un pack</option>
+                            <option value="test">48 heures (test)</option>
+                            <option value="6 mois">6 mois</option>
+                            <option value="1 année">1 année</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Valider</button>
+                </form>
+            </div>
+            <br clear="left">
+        </div>
+
+        <!--Modal footer-->
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-primary" type="button">
+                Fermer
+            </button>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,158 @@
+{% extends 'frontOffice/base.html.twig' %}
+{% block title %}Conditions d'utilisation - {{ parent() }}{% endblock %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1 id="page-title">
+                            Conditions d'utilisation
+                        </h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Conditions d'utilisation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="blog-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <!-- Blog box start -->
+                    <div class="thumbnail blog-box clearfix">
+                        <!-- detail -->
+                        <div class="caption detail">
+                            <!-- Title -->
+                            <h1 class="title">
+                                <a href="#">Conditions générales d'utilisation</a>
+                            </h1>
+                            <p>
+                                Ce Site Web immobiliere.tn est un service fourni par Immobilière 3M. Veuillez lire ces
+                                Conditions Générales d’Utilisation avant que vous accédiez ou utiliser le site
+                                immobiliere.tn. Si vous êtes incapable d’accepter nos Conditions Générales d’Utilisation
+                                ou
+                                nos autres Chartes, vous pouvez ne pas utiliser nos services.
+                                 </p>
+
+                            <h4>Déclarations:</h4>
+                            <p>
+                                Les annonceurs reconnaissent que le contenu publicitaire, y compris les textes, images,
+                                graphique, vidéos, publié sur immobiliere.tn est exact et conforme aux lois en vigueur.
+                                immobiliere.tn et Immobilière 3M n'assument aucune responsabilité quant à toute
+                                illicéité ou
+                                toute erreur relative au Contenu.
+                            </p>
+                            <p>
+                                L'annonceur convient que son Contenu ne viole aucun droit d'auteur, droits de la
+                                propriété
+                                intellectuelle ou d'autres droits de toute personne ou entité. Les annonceurs acceptent
+                                de
+                                libérer immobiliere.tn et Immobilière 3M de toute obligation, responsabilité et demande
+                                découlant ou en relation avec l’utilisation de ou l’impossibilité d’utiliser le service,
+                                sous n’importe quelle théorie de responsabilité ou n’importe quel fondement juridique, y
+                                compris les dommages et les coûts.
+                            </p>
+                            <p>
+                                Les annonceurs acceptent que leur Contenu puisse être présenté à travers les sites
+                                partenaires de immobiliere.tn et Immobilière 3M conformément aux mêmes conditions
+                                générales
+                                d’utilisation qu' immobiliere.tn et Immobilière 3M.
+                                <br>
+                                Les annonceurs, acceptent en outre de transférer les droits du contenu de leurs annonces
+                                à
+                                immobiliere.tn et Immobilière 3M.
+                                 </p>
+                             
+                            <h4>Renonciation:</h4>
+                            <p>
+                                immobiliere.tn et Immobilière 3M ne saurait être tenue responsable de l'utilisation de
+                                immobiliere.tn et renonce à toute responsabilité pour toute perte, préjudice,
+                                responsabilité, ou dommage de toute nature résultant de, découlant de:
+                            </p>
+                            <ul>
+                                <li>
+                                    Des erreurs ou omissions afférentes au immobiliere.tn et au Contenu, y compris et
+                                    sans
+                                    limitation aux inexactitudes techniques ou aux erreurs typographiques.
+                                </li>
+                                <li>
+                                    Des sites web de tiers ou de contenu directement ou indirectement accessible via les
+                                    liens
+                                    présents sur immobiliere.tn.
+                                </li>
+                                <li>
+                                    De l'indisponibilité d’immobiliere.tn ou de tout élément de ce dernier,
+                                    De votre usage d’immobiliere.tn.
+                                </li>
+                                <li>
+                                    De votre usage de tout équipement ou logiciel sur immobiliere.tn.
+                                </li>
+                            </ul>
+                             
+                            <h4>Filigranes:</h4>
+                            <p>
+                                Toutes les images sont en filigranes afin d’empêcher qu'elles soient utilisées à
+                                d'autres
+                                fins sans le consentement préalable de l'annonceur.
+                                 </p>
+
+                            <h4>Sécurité et images:</h4>
+                            <p>
+                                immobiliere.tn se réserve le droit de ne pas publier des images qui n'ont aucun rapport
+                                avec
+                                le Contenu, ou des images ne respectant pas les règles d’ immobiliere.tn.
+                            </p>
+
+                            <h4>Données Personnelles:</h4>
+                            <p>
+                                immobiliere.tn a le droit de coopérer avec les autorités dans le cas où le Contenu
+                                serait en
+                                infraction avec la réglementation en vigueur.<br>
+                                immobiliere.tn se réserve le droit de rechercher toutes les voies de recours disponibles
+                                en
+                                matière de droit en cas de violation des conditions d’utilisation du site et notamment
+                                le
+                                droit de bloquer l'accès au immobiliere.tn et Immobilière 3M et à ses fonctionnalités.
+                                 </p>
+
+                            <h4>Indemnisation:</h4>
+                            <p>Les annonceurs s'engagent à indemniser, défendre et dégager immobiliere.tn et Immobilière
+                                3M, contre toutes les pertes, dépenses, dommages et coûts, y compris les honoraires
+                                d'avocats, résultant de toute violation de ces modalités et conditions, y compris tout
+                                comportement fautif ou négligent de la part des toute personne accédant a immobiliere.tn
+                                 </p>
+                            <h4>Modification:</h4>
+                            <p>
+                                immobiliere.tn et Immobilière 3M se réservent le droit de modifier les conditions
+                                générales
+                                d’utilisation du site à n'importe quel moment dans la mesure permise par la loi
+                                applicable.
+                                Vous êtes responsable de consulter régulièrement telles modifications et votre accès
+                                régulier ou utilisation d’ immobiliere.tn doit être considérée comme votre approbation
+                                des
+                                modalités et conditions modifiées.
+                            </p>
+
+                            <h4>Loi applicable:</h4>
+                            <p>
+                                immobiliere.tn et Immobilière 3M opère sous la loi et les législations tunisienne. Les
+                                annonceurs conviennent que tout litige ou réclamation afférent à l'utilisation d’
+                                immobiliere.tn et Immobilière 3M sera de la compétence exclusive des tribunaux Tunisien.
+                            <p>
+                        </div>
+                    </div>
+                    <!-- Blog box end-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

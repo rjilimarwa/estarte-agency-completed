@@ -1,0 +1,57 @@
+<tr id="row-id-{{ entity.id }}" class="row-id-{{ entity.id }}">
+    <td class="text-left">{{ entity.uniqueName }}</td>
+    <td class="text-left">{{ entity.mobile }}</td>
+    <td class="text-left">{{ entity.user.email }}</td>
+    <td class="text-center">{{ entity.user.createdAt|localizeddate('medium', 'none') }}
+    </td>
+    <td class="text-center">
+        {% set route = path('back_administrator_enable', {'id': entity.id}) %}
+        {{ entity.user.enabled|activate(route, entity.user.id, entity.user.enabled) }}
+    </td>
+    <td class="text-center">
+        <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+
+            <a href="{{ path('back_administrator_edit', {'id': entity.id}) }}"
+               class="add-tooltip tooltip-info"
+               data-placement="top" data-original-title="Edit">
+                <i class="fa fa-pencil text-primary bigger-130"></i>
+            </a>&nbsp;&nbsp;
+            <a href="{{ path('back_administrator_delete', {'id': entity.id}) }}"
+               data-entity-id="{{ entity.id }}" class="add-tooltip tooltip-error remove-item"
+               data-placement="top" data-toggle="tooltip" data-original-title="Delete">
+                <i class="fa fa-trash text-danger bigger-130"></i>
+            </a>
+        </div>
+
+        <div class="visible-xs visible-sm hidden-md hidden-lg">
+            <div class="inline position-relative">
+                <button data-toggle="dropdown"
+                        class="btn btn-xs btn-primary dropdown-toggle dropdown-toggle-icon"
+                        type="button" aria-expanded="false"><i class="dropdown-caret fa fa-caret-down"></i>
+                </button>
+
+                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret
+                            dropdown-close">
+                    <li class="text-center">
+                        <a href="{{ path('back_administrator_edit', {'id': entity.id}) }}"
+                           class="add-tooltip tooltip-info"
+                           data-placement="left" data-original-title="Edit">
+                            <i class="fa fa-pencil text-primary bigger-130"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('back_administrator_delete', {'id': entity.id}) }}"
+                           class="add-tooltip tooltip-error remove-item"
+                           data-placement="left" data-toggle="tooltip" data-original-title="Supprimer">
+                            <span class="red">
+                                <i class="fa fa-trash text-danger bigger-130"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </td>
+</tr>
+

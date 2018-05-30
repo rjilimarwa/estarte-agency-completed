@@ -1,0 +1,84 @@
+{% extends "back_office/base.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block page_title %} Mon profil {% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <li class="active">Mon profil</li>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-12">
+        <!--Profile Heading-->
+        <!--===================================================-->
+        <div class="panel">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Mes informations</h3>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-horizontal col-lg-8">
+                        <div class="row">
+                            <label class="control-label col-lg-4">Nom et prénom:</label>
+                            <div class="col-lg-8">
+                                <p class="form-control-static">{{ app.user.administrator.uniqueName|default('')|title }}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="control-label col-lg-4">Nom d'utilisateur:</label>
+                            <div class="col-lg-8">
+                                <p class="form-control-static">{{ app.user.username }}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="control-label col-lg-4">E-mail:</label>
+                            <div class="col-lg-8">
+                                <p class="form-control-static">{{ app.user.email }}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="control-label col-lg-4">Mobile:</label>
+                            <div class="col-lg-8">
+                                <p class="form-control-static">{{ app.user.mobile|default('') }}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="control-label col-lg-4">Dérnier connexion:</label>
+                            <div class="col-lg-8">
+                                <p class="form-control-static">
+                                    {{ app.user.lastLogin|localizeddate('medium', 'none', format='dd MMM yyyy à HH:mm') }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <br><br>
+                            <div class="pad-btm col-lg-3 text-left">
+                                <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-success">Modifier le profil</a>
+                            </div>
+                            &nbsp;&nbsp;
+
+                            <div class="pad-btm col-lg-3 text-left">
+                                <a href="{{ path('fos_user_change_password') }}" class="btn btn-danger">Changer le mot
+                                    de passe</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!--===================================================-->
+        </div>
+    </div>
+
+</div>
+
+{% endblock body %}

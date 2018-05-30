@@ -1,0 +1,27 @@
+{% extends 'backOffice/base.html.twig' %}
+
+{% block page_title %}Administrartion{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+{% endblock breadcrumb %}
+
+{% block body %}
+    <div class="col-sm-12 col-md-12">
+
+        <!--Mega menu widget-->
+        <div class="text-center bg-purple pad-all" style="min-height: 460px;">
+            <h3 class="text-thin mar-no">Administration</h3>
+            <div class="pad-ver box-inline">
+                <span class="icon-wrap icon-wrap-lg icon-circle bg-trans-light">
+                    <i class="fa fa-laptop fa-4x"></i>
+                </span>
+            </div>
+            <p class="pad-btm">
+                &nbsp;
+            </p>
+            &nbsp;
+        </div>
+
+    </div>
+{% endblock body %}

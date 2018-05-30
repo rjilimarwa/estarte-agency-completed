@@ -1,0 +1,76 @@
+{% extends 'backOffice/base.html.twig' %}
+
+{% block page_title %}Messages reçus{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">Messages reçus</li>
+{% endblock breadcrumb %}
+
+{% block body %}
+
+    {# ne pas oublier class tab-base#}
+    <div class="tab-base">
+        <!--Nav Tabs-->
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="" aria-expanded="true">Recus <span
+                            class="badge badge-purple">{{ entities|length }}</span></a>
+            </li>
+            <li class="">
+                <a href="{{ path('back_message_sent_list') }}"
+                   aria-expanded="false">Envoyés <span
+                            class="badge badge-purple"></span>
+                </a>
+            </li>
+            <li class="">
+                <a href="{{ path('back_message_sent_new') }}" aria-expanded="false">Ecrire</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" style="padding: 1px;">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr class="item-to-hide">
+                                <td style="padding: 15px;" class="col-md-2">
+                                    <a href="{{ path('back_message_received_show', {'id': entity.id}) }}">
+                                        De: <strong>{{ entity.fullName|title }}</strong></a>
+                                </td>
+                                <td style="padding: 15px;">
+                                    <a href="{{ path('back_message_received_show', {'id': entity.id}) }}">
+                                        <strong>{{ entity.subject|title }}:</strong>
+                                        {{ entity.message|slice(0,80) }}...
+                                    </a>
+                                </td>
+                                <td style="padding: 15px;" class="col-md-2 text-right">
+                                    {{ entity.createdAt|localizeddate('medium', 'none', format='dd MMM yyyy à HH:mm') }}
+                                </td>
+                                <td style="padding: 15px;" class="col-md-1 text-right">
+                                    <a href="{{ path('back_message_received_delete', {'id': entity.id}) }}"
+                                       data-entity-id="{{ entity.id }}"
+                                       class="text-danger fa-1x fa fa-times remove-item" style="color: red">
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Mail footer-->
+                <div class="panel-footer clearfix">
+                    <div class="pull-left">
+                        {{ knp_pagination_render(entities) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock body %}
+

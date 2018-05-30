@@ -1,0 +1,21 @@
+back_staff_list:
+    path:     /
+    defaults: { _controller: AppBundle:BackOffice\StaffBack:list}
+
+back_staff_new:
+    path:     /creer
+    defaults: { _controller: AppBundle:BackOffice\StaffBack:new}
+
+back_staff_show:
+    path:     /voir/{id}
+    defaults: { _controller: AppBundle:BackOffice\StaffBack:show}
+
+back_staff_edit:
+    path:     /modifier/{id}
+    defaults: { _controller: AppBundle:BackOffice\StaffBack:edit}
+
+back_staff_delete:
+    path:     /supprimer/{id}
+    defaults: { _controller: AppBundle:BackOffice\StaffBack:delete}
+    methods:   [POST]
+

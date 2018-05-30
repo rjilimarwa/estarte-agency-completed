@@ -1,0 +1,44 @@
+<form action="{{ path('front_properties_search') }}" method="get" class="form-search">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+            <div class="form-group">
+                {{ form_widget(form_search_mini.operation, { 'attr': {'class': 'selectpickers form-control search-fields', 'placeholder': 'Opération'}} ) }}
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+            <div class="form-group">
+                {{ form_widget(form_search_mini.category, { 'attr': {'class': 'selectpickers form-control search-fields', 'placeholder': 'Type de bien'}} ) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+            <div class="form-group">
+                {{ form_widget(form_search_mini.city, { 'attr': {'class': 'selectpickerr form-control search-fields city-search-horizontal-mini', 'placeholder': 'Gouvernorat'}} ) }}
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+            <div class="form-group">
+                {{ form_widget(form_search_mini.area, { 'attr': {'class': 'selectpickers form-control search-fields area-search-mini', 'placeholder': 'Ville'}} ) }}
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+            <div class="form-group">
+                {{ form_widget(form_search_mini.priceMin, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Prix minimum', 'minimum': '0'}} ) }}
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+            <div class="form-group">
+                {{ form_widget(form_search_mini.priceMax, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Prix maximum', 'min': '0'}} ) }}
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-13">
+            <div class="form-group">
+                <button type="submit" class="search-button">Chercher</button>
+            </div>
+        </div>
+    </div>
+</form>

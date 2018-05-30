@@ -1,0 +1,121 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <!--Modal header-->
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title text-center">{{ entity.uniqueName|title }}</h4>
+        </div>
+
+        <!--Modal body-->
+        <div class="modal-body">
+            <table class="table table-striped">
+                <tr>
+                    <td class="td-title">Nom:</td>
+                    <td class="td-val"><strong>{{ entity.uniqueName|title }}</strong></td>
+                </tr>
+                <tr>
+                    <td class="td-title">Type:</td>
+                    <td class="td-val">
+                        {% if entity.company %}
+                            Entreprise
+                        {% else %}
+                            Particulier
+                        {% endif %}
+                    </td>
+                </tr>
+                {% if entity.particular %}
+                    <tr>
+                        <td class="td-title">Civilité:</td>
+                        <td class="td-val">
+                            {{ entity.particular.civility|upper }}
+                        </td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td class="td-title">Ville:</td>
+                    <td class="td-val">{{ entity.city.name|default('')|capitalize }}
+                        / {{ entity.area.name|default('')|capitalize }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Adresse:</td>
+                    <td class="td-val">
+                        {% if entity.address != '' %}
+                            {{ entity.address }}, {{ entity.postCode }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-title">Email:</td>
+                    <td class="td-val">{{ entity.email }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Mobile:</td>
+                    <td class="td-val">{{ entity.mobile }}</td>
+                </tr>
+                {% if entity.company %}
+                    <tr>
+                        <td class="td-title">Tél fixe:</td>
+                        <td class="td-val">{{ entity.company.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-title">Fax:</td>
+                        <td class="td-val">{{ entity.company.fax }}</td>
+                    </tr>
+                    <tr>
+                        <td class="td-title">Code TVA:</td>
+                        <td class="td-val">{{ entity.company.taxRegistrationNumber }}</td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td class="td-title">Nombre des annonces:</td>
+                    <td class="td-val"><strong>{{ countProperties }}</strong></td>
+                </tr>
+                <tr>
+                    <td class="td-title">Etat:</td>
+                    <td class="td-val">
+                        {% if entity.enabled == '1' %}
+                            <span class="badge badge-success">
+                                Activé <span class="fa fa-check"></span>
+                            </span>
+                        {% elseif entity.enabled == '0' %}
+                            <span class="badge badge-warning">
+                                Désactivé <span class="fa fa-hourglass-half"></span>
+                            </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {#<tr>
+                    <td class="td-title">Nb vues:</td>
+                    <td class="td-val">{{ entity.countViews }}</td>
+                </tr>#}
+                <tr>
+                    <td class="td-title">Inscri le:</td>
+                    <td class="td-val">{{ entity.createdAt|localizeddate('medium', 'none', 'fr') }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Dérnier connexion:</td>
+                    <td class="td-val">{{ entity.lastLogin|localizeddate('medium', 'none', 'fr') }}</td>
+                </tr>
+                {% if entity.company %}
+                    <tr>
+                        <td class="td-title">Logo:</td>
+                        <td class="td-val">
+                            <img src="{{ asset(entity.company.logo.webPath|imagine_filter('standard_200_200')) }}"
+                                 class="img-responsive">
+                        </td>
+                    </tr>
+                {% endif %}
+            </table>
+        </div>
+
+        <!--Modal footer-->
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-primary" type="button">
+                Fermer
+            </button>
+        </div>
+    </div>
+</div>
+

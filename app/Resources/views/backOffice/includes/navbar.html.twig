@@ -1,0 +1,171 @@
+<!--NAVBAR-->
+<!--===================================================-->
+<header id="navbar">
+    <div id="navbar-container" class="boxed">
+
+        <!--Brand logo & name-->
+        <!--================================-->
+        <div class="navbar-header">
+            <a href="" class="navbar-brand">
+                <img src="{{ asset('backOffice/img/logo.png') }}" alt="Nifty Logo" class="brand-icon">
+                <div class="brand-title">
+                    <span class="brand-text">Administration</span>
+                </div>
+            </a>
+        </div>
+        <!--================================-->
+        <!--End brand logo & name-->
+
+
+        <!--Navbar Dropdown-->
+        <!--================================-->
+        <div class="navbar-content clearfix">
+            <ul class="nav navbar-top-links pull-left">
+
+
+                <li class="tgl-menu-btn">
+                    <a class="mainnav-toggle" href="#">
+                        <i class="pli-view-list"></i>
+                    </a>
+                </li>
+
+                <!--Messages dropdown-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                        <i class="psi-mail"></i>
+                    </a>
+
+                    <!--Notification dropdown menu-->
+                    <div class="dropdown-menu dropdown-menu-md">
+                        <div class="pad-all bord-btm">
+                            <p class="text-lg text-semibold mar-no">Les derniers messages récus</p>
+                        </div>
+                        <div class="nano scrollable">
+                            <div class="nano-content">
+                                <ul class="head-list">
+
+                                    <!-- Dropdown list-->
+                                    {% for entity in lastMessages %}
+                                        <li>
+                                            <a href="{{ path('back_message_received_show', {'id': entity.id}) }}">
+                                                <div class="clearfix">
+                                                    <p class="pull-left text-sm">
+                                                        <i>
+                                                            {{ entity.createdAt|localizeddate('none', 'none', format='EEEE dd MMM yyyy à HH:mm') }}
+                                                        </i>
+                                                    </p>
+                                                    <p class="pull-left">{{ entity.fullName }}</p>
+                                                </div>
+                                                <div class="progress progress-sm">
+                                                    <div style="width: 100%;" class="progress-bar">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!--Dropdown footer-->
+                        <div class="pad-all bord-top">
+                            <a href="{{ path('back_message_received_list') }}" class="btn-link text-dark box-block">
+                                <i class="fa fa-angle-right fa-lg pull-right"></i>Voir tous
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End messages dropdown-->
+
+
+                <!--Mega dropdown-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <li class="mega-dropdown">
+                    <a href="#" class="mega-dropdown-toggle">
+                        <i class="pli-layout-grid"></i>
+                    </a>
+                    <div class="dropdown-menu mega-dropdown-menu">
+                        <div class="clearfix">
+                            <div class="col-xs-12">
+
+                                <div class="col-lg-3">
+                                    <!--Mega menu list-->
+                                    <ul class="list-unstyled">
+                                        <li class="dropdown-header"><i class="fa fa-list"></i> Menu</li>
+                                        <li>
+                                            <a href="{{ path('back_list_properties', {'interval': 'tous'}) }}">
+                                                <i class="fa fa-list"></i>&nbsp;
+                                                <span class="menu-title">Annonces</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <ul class="list-unstyled">
+                                        <li class="dropdown-header"><i class="fa fa-envelope"></i> Messages</li>
+                                        <li><a href="{{ path('back_message_received_list') }}">Boite reception</a></li>
+                                        <li><a href="{{ path('back_message_sent_list') }}">Boite envoi</a></li>
+                                        <li><a href="{{ path('back_message_sent_new') }}">Ecrire</a></li>
+                                        {#<li class="divider"></li>#}
+                                    </ul>
+                                </div>
+
+                                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                    <div class="col-lg-3">
+                                        <!--Mega menu list-->
+                                        <ul class="list-unstyled">
+                                            <li class="dropdown-header"><i class="fa fa-group"></i> Utilisateurs</li>
+                                            {#<li class="dropdown-header"><i class="fa fa-users"></i> Utilisateurs</li>#}
+                                            <li><a href="{{ path('back_administrator_list') }}">Administrateurs</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End mega dropdown-->
+
+            </ul>
+
+
+            <ul class="nav navbar-top-links pull-right">
+                <li>
+                    <div class="pad-all-sm text-right">
+                        <a href="{{ path('fos_user_security_logout') }}" class="btn btn-primary">
+                            <i class="fa fa-power-off"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                    </div>
+                </li>
+
+                <!--User dropdown-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <li id="dropdown-user" class="dropdown">
+                    <a href="{{ path('fos_user_profile_show') }}" class="dropdown-toggle text-right">
+                        <span class="pull-right">
+                            <img class="img-circle img-user media-object"
+                                 src="{{ asset('backOffice/img/av1.png') }}" alt="Profile Picture">
+                        </span>
+                        <div class="username hidden-xs">{{ app.user.username|default() }}</div>
+                    </a>
+                </li>
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End user dropdown-->
+
+            </ul>
+        </div>
+        <!--================================-->
+        <!--End Navbar Dropdown-->
+
+    </div>
+</header>
+
+<!--===================================================-->
+<!--END NAVBAR-->

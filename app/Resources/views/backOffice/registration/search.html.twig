@@ -1,0 +1,101 @@
+{% form_theme form_search 'backOffice/form/search_form.html.twig' %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-headinggg">
+                <div class="panel-control">
+                    <a class="btn btn-default add-tooltip" data-target="#demo-panel-collapse-default"
+                       data-toggle="collapse"
+                       data-original-title="Afficher/Cacher"><i class="fa fa-chevron-down"></i></a>
+                </div>
+                <h3 class="panel-title">Chercher</h3>
+            </div>
+            <div id="demo-panel-collapse-default" class="collapse">
+
+                <form action="{{ path('back_registration_search') }}" method="get" class="form-reset form-search"
+                      id="search-form">
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.firstName) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.lastName) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.civility) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{ form_widget(form_search.email) }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ form_widget(form_search.phone) }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ form_widget(form_search.mobile) }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ form_widget(form_search.fax) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{ form_widget(form_search.country) }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ form_widget(form_search.city) }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ form_widget(form_search.address) }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ form_widget(form_search.postCode) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.corporateName) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.taxRegistrationNumber) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.activity) }}
+                            </div>
+                        </div>
+                        <div class="row" style="display: none">
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.createdAt) }}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            {{ form_rest(form_search) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <span class="loading">
+                                <i class="fa fa-spinner fa-pulse text-primary fa-4x" aria-hidden="true"></i>
+                            </span>
+                            <button class="btn btn-info btn-labeled fa fa-search fa-lg" type="submit"
+                                    onsubmit=" return false;">Chercher
+                            </button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="reset" class="btn btn-warning btn-labeled fa fa-repeat fa-lg" id="reset">
+                                Réinstaller
+                            </button>
+                            <br><br>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

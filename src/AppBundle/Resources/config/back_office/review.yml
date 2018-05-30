@@ -1,0 +1,21 @@
+back_review_list:
+    path:     /
+    defaults: { _controller: AppBundle:BackOffice\ReviewBack:list}
+
+back_review_new:
+    path:     /creer
+    defaults: { _controller: AppBundle:BackOffice\ReviewBack:new}
+
+back_review_show:
+    path:     /voir/{id}
+    defaults: { _controller: AppBundle:BackOffice\ReviewBack:show}
+
+back_review_edit:
+    path:     /modifier/{id}
+    defaults: { _controller: AppBundle:BackOffice\ReviewBack:edit}
+
+back_review_delete:
+    path:     /supprimer/{id}
+    defaults: { _controller: AppBundle:BackOffice\ReviewBack:delete}
+    methods:   [POST]
+

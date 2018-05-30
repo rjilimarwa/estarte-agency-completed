@@ -1,0 +1,43 @@
+home_page:
+    resource: "@AppBundle/Resources/config/back_office/default.yml"
+    prefix:   /
+
+product:
+    resource: "@AppBundle/Resources/config/back_office/product.yml"
+    prefix:   /produits
+
+category:
+    resource: "@AppBundle/Resources/config/back_office/category.yml"
+    prefix:   /categories
+
+registration:
+    resource: "@AppBundle/Resources/config/back_office/registration.yml"
+    prefix:   /inscriptions
+
+customer:
+    resource: "@AppBundle/Resources/config/back_office/customer.yml"
+    prefix:   /clients
+
+administrator:
+    resource: "@AppBundle/Resources/config/back_office/administrator.yml"
+    prefix:   /administrateurs
+
+messages_sent:
+    resource: "@AppBundle/Resources/config/back_office/message_sent.yml"
+    prefix:   /message/envoyes
+
+messages_received:
+    resource: "@AppBundle/Resources/config/back_office/message_received.yml"
+    prefix:   /message/recus
+
+slider:
+    resource: "@AppBundle/Resources/config/back_office/slider.yml"
+    prefix:   /slider
+
+review:
+    resource: "@AppBundle/Resources/config/back_office/review.yml"
+    prefix:   /reviews
+
+staff:
+    resource: "@AppBundle/Resources/config/back_office/staff.yml"
+    prefix:   /satff

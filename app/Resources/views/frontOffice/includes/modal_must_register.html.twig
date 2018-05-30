@@ -1,0 +1,32 @@
+<div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     style="z-index: 9999999">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-md">
+            <div class="modal-header" style="background-color: ghostwhite">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="font-size: 24px;" class="base-color">&times;</span></button>
+                <h4 class="modal-title base-color" style="position: inherit" id="myModalLabel">S'inscrire</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <a href="{{ path('fos_user_registration_register')~'?type=particular' }}"
+                           class="btn button-theme btn-lg">Je suis un particulier</a>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <h4> Ou bien</h4>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <a href="{{ path('fos_user_registration_register')~'?type=company' }}"
+                           class="btn button-theme btn-lg">Je suis une entreprise</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-one-black" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>

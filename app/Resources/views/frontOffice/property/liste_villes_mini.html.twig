@@ -1,0 +1,6 @@
+<select id="area" name="area" class="selectpickers form-control search-fields area-search-mini" placeholder="Ville">
+    <option value="">Ville</option>
+    {% for ville in villes %}
+        <option value="{{ ville.slug }}">{{ ville.name }}</option>
+    {% endfor %}
+</select>

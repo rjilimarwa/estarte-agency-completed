@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+{% spaceless %}
+
+    <head>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-8182502623916154",
+                enable_page_level_ads: true
+            });
+        </script>
+        <meta name="author" content="Houssem Derouich">
+        <meta charset="UTF-8" name="description"
+              content="immobiliere.tn est un site internet pour les annonces immobilière gratuitement en tunisie"/>
+        <meta name="keywords"
+              content="{% block keywords %}immobiliere.tn, annonces immobilière tunisie, vente, achat, location, maison, villa, terrain, studio, commerce, bureau{% endblock %}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title %}Immobiliere.tn{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/assets/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/assets/css/animate.min.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/assets/css/bootstrap-submenu.css') }}">
+            <link rel="stylesheet" type="text/css"
+                  href="{{ asset('frontOffice/assets/css/bootstrap-select.min.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/assets/css/leaflet.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/assets/css/map.css') }}">
+            <link rel="stylesheet" type="text/css"
+                  href="{{ asset('frontOffice/assets/fonts/font-awesome/css/font-awesome.min.css') }}">
+            <link rel="stylesheet" type="text/css"
+                  href="{{ asset('frontOffice/assets/fonts/flaticon/font/flaticon.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/assets/fonts/linearicons/style.css') }}">
+            <link rel="stylesheet" type="text/css"
+                  href="{{ asset('frontOffice/assets/css/jquery.mCustomScrollbar.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/assets/css/dropzone.css') }}">
+            <!-- Custom stylesheet -->
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/assets/css/style.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/assets/css/skins/green-light.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/assets/custom.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('frontOffice/ajax.css') }}"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset('flashMessage/css/flash-message.css') }}"/>
+
+        {% endblock %}
+        <!-- Google fonts -->
+        {#       <link rel="stylesheet" type="text/css"
+                     href=https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPlayfair+Display:400,700%7CRoboto:100,300,400,400i,500,700">
+       #}
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('frontOffice/assets/css/ie10-viewport-bug-workaround.css') }}">
+
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]>
+        <script type="text/javascript"
+                src="{{ asset('frontOffice/assets/js/ie8-responsive-file-warning.js') }}"></script>
+        <![endif]-->
+        <script type="text/javascript"
+                src="{{ asset('frontOffice/assets/js/ie-emulation-modes-warning.js') }}"></script>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/html5shiv.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/respond.min.js') }}"></script>
+        <![endif]-->
+
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/jquery-2.2.0.min.js') }}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+    </head>
+    <!-- page wrapper -->
+    <body>
+
+    {#<!-- .preloader -->#}
+    {#<div class="page_loader"></div>#}
+    {#<!-- /.preloader -->#}
+
+
+    {{ render(controller('AppBundle:FrontOffice/DefaultFront:header')) }}
+
+
+    {% block body %}{% endblock %}
+
+    <div id="divLoading" class="" style="z-index: 99999">
+        <img src="{{ asset('images/ajax_loader.gif') }}" width="150" height="150"/>
+    </div>
+    {{ include('FlashMessage/flash-messages.html.twig') }}
+    {{ include('frontOffice/includes/footer.html.twig') }}
+
+    <!--Scroll to top-->
+    <a id="page_scroller" href="#top" style="position: fixed; z-index: 2147483647; display: block;"><i
+                class="fa fa-chevron-up"></i></a>
+
+    {{ render(controller('AppBundle:FrontOffice/Security:login')) }}
+    {{ include('frontOffice/includes/modal_must_login.html.twig') }}
+    {{ include('frontOffice/includes/modal_must_register.html.twig') }}
+
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/bootstrap-submenu.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/rangeslider.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/jquery.mb.YTPlayer.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/wow.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/bootstrap-select.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/jquery.easing.1.3.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/jquery.scrollUp.js') }}"></script>
+        <script type="text/javascript"
+                src="{{ asset('frontOffice/assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/leaflet.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/leaflet-providers.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/leaflet.markercluster.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/dropzone.js') }}"></script>
+        {#<script type="text/javascript" src="{{ asset('frontOffice/assets/js/maps.js') }}"></script>#}
+        <script type="text/javascript" src="{{ asset('frontOffice/assets/js/app.js') }}"></script>
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script type="text/javascript"
+                src="{{ asset('frontOffice/assets/js/ie10-viewport-bug-workaround.js') }}"></script>
+        <!-- Custom javascript -->
+        <script type="text/javascript"
+                src="{{ asset('frontOffice/assets/js/ie10-viewport-bug-workaround.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/ajax.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/favorite.js') }}"></script>
+        <script src="{{ asset('backOffice/js/bootbox.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('frontOffice/ajax_front.js') }}"></script>
+        <script src="{{ asset('flashMessage/js/flash-message.js') }}" type="text/javascript"></script>
+        <script>
+            $('#flash-messages').flashNotification('init');
+        </script>
+        <script>
+            $(document).ready(function () {
+                var $citySearchVertical = $('.city-search-vertical');
+                $citySearchVertical.change(function () {
+                    var data = $citySearchVertical.val();
+                    $.ajax({
+                        url: "{{ path('front_properties_get_villes') }}" + "?slug=" + data,
+                        type: 'GET',
+                        data: data,
+                        dataType: 'json',
+                        success: function (html) {
+                            $('.area-search').replaceWith(html);
+                        }
+                    });
+
+                });
+
+                var $citySearchHorizontal = $('.city-search-horizontal');
+                $citySearchHorizontal.change(function () {
+                    var data = $citySearchHorizontal.val();
+                    $.ajax({
+                        url: "{{ path('front_properties_get_villes') }}" + "?slug=" + data,
+                        type: 'GET',
+                        data: data,
+                        dataType: 'json',
+                        success: function (html) {
+                            $('.area-search').replaceWith(html);
+                        }
+                    });
+                });
+
+                var $citySearchHorizontalMini = $('.city-search-horizontal-mini');
+                $citySearchHorizontalMini.change(function () {
+                    var data = $citySearchHorizontalMini.val();
+                    $.ajax({
+                        url: "{{ path('front_properties_get_villes_mini') }}" + "?slug=" + data,
+                        type: 'GET',
+                        data: data,
+                        dataType: 'json',
+                        success: function (html) {
+                            $('.area-search-mini').replaceWith(html);
+                        }
+                    });
+                });
+
+                $(".my-account-box a").filter(function () {
+                    return this.href == location.href.replace(/#.*/, "");
+                }).addClass("active");
+                $(".dropdown a").filter(function () {
+                    return this.href == location.href.replace(/#.*/, "");
+                }).parents('li').addClass("active");
+            });
+
+        </script>
+    {% endblock %}
+    </body>
+{% endspaceless %}
+</html>

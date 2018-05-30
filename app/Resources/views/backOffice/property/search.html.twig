@@ -1,0 +1,114 @@
+{% form_theme form_search 'backOffice/form/search_form.html.twig' %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-headinggg">
+                <div class="panel-control">
+                    <a class="btn btn-default add-tooltip" data-target="#demo-panel-collapse-default"
+                       data-toggle="collapse"
+                       data-original-title="Afficher/Cacher"><i class="fa fa-chevron-down"></i></a>
+                </div>
+                <h3 class="panel-title">Chercher</h3>
+            </div>
+            <div id="demo-panel-collapse-default" class="collapse">
+
+                <form action="{{ path('back_property_search') }}" method="get" class="form-reset form-search"
+                      id="search-form">
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_widget(form_search.title) }}
+                            </div>
+                            <div class="col-md-6">
+                                #
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.type) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.category) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.activity) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.country) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.city) }}
+                            </div>
+                        </div>
+                        <div class="row" style="display: none">
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.publishedAt) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_widget(form_search.expireAt) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                {{ form_widget(form_search.active) }}
+                            </div>
+                        </div>
+
+                        
+                        <div class="row">
+                            {{ form_rest(form_search) }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <span class="loading">
+                                <i class="fa fa-spinner fa-pulse text-primary fa-4x" aria-hidden="true"></i>
+                            </span>
+                            <button class="btn btn-info btn-labeled fa fa-search fa-lg" type="submit"
+                                    onsubmit=" return false;">Chercher
+                            </button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="reset" class="btn btn-warning btn-labeled fa fa-repeat fa-lg" id="reset">
+                                Réinstaller
+                            </button>
+                            <br><br>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var $country_search = $('#country');
+    // When sport gets selected ...
+    $country_search.change(function() {
+        // ... retrieve the corresponding form.
+        var $form = $(this).closest('form');
+        // Simulate form data, but only include the selected sport value.
+        var data = {};
+        data[$country_search.attr('name')] = $country_search.val();
+        // Submit data via AJAX to the form's action path.
+        $.ajax({
+            url : '{{ path('back_property_form_search') }}',
+            type: 'POST',
+            data : data,
+            success: function(html) {
+                console.log($country_search);
+                // Replace current position field ...
+                $('#city').replaceWith(
+                    // ... with the returned one from the AJAX response.
+                    $(html).find('#city')
+                );
+                // Position field now displays the appropriate positions.
+            }
+        });
+    });
+</script>

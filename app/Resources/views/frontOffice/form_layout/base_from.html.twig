@@ -1,0 +1,20 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block file_widget %}
+    {% spaceless %}
+            {% set type = type|default('file') %}
+            <input type="{{ type }}"
+                   class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        {% if image_url is not null %}
+            <img src="{{ asset(image_url | imagine_filter('standard_200_200')) }}" width="" height="" style="margin-top:10px; margin-bottom: 20px;"/>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+
+
+{%- block hidden_row -%}
+    <div style="display:none">
+        {{ form_widget(form) }}
+    </div>
+{%- endblock hidden_row -%}

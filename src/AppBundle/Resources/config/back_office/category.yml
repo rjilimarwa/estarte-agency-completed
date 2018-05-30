@@ -1,0 +1,19 @@
+back_category_list:
+    path:     /
+    defaults: { _controller: AppBundle:BackOffice\CategoryBack:list}
+
+back_category_new:
+    path:     /creer
+    defaults: { _controller: AppBundle:BackOffice\CategoryBack:new}
+
+back_category_edit:
+    path:     /modifier/{id}
+    defaults: { _controller: AppBundle:BackOffice\CategoryBack:edit}
+
+back_category_delete:
+    path:     /supprimer/{id}
+    defaults: { _controller: AppBundle:BackOffice\CategoryBack:delete}
+    methods:   [POST]
+    options:
+        expose: true
+

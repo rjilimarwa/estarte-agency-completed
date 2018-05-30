@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Mitula>
+    {% for entity in entities %}
+        <ad>
+            <id><![CDATA[{{ entity.id }}]]></id>
+            <url><![CDATA[https://immobiliere.tn/annonces/details/{{ entity.slug }}]]></url>
+            <title><![CDATA[{{ entity.title }}]]></title>
+            <type><![CDATA[{{ entity.operation.name }} {{ entity.category.name }}]]></type>
+            <agency><![CDATA[3M immobilières]]></agency>
+            <content><![CDATA[{{ entity.description }}]]></content>
+            <price><![CDATA[{{ entity.price }}]]></price>
+            <property_type><![CDATA[{{ entity.category.name }}]]></property_type>
+            {% if entity.floorArea != '' %}
+                <floor_area><![CDATA[{{ entity.floorArea }}]]></floor_area>
+            {% endif %}
+            {% if entity.floorNumber != '' %}
+                <floor_number><![CDATA[{{ entity.floorNumber|default('') }}]]></floor_number>
+            {% endif %}
+            {% if entity.roomNumber != '' %}
+                <rooms><![CDATA[{{ entity.roomNumber|default('') }}]]></rooms>
+            {% endif %}
+            {% if entity.bathRoomNumber != '' %}
+                <bathrooms><![CDATA[{{ entity.bathRoomNumber|default('') }}]]></bathrooms>
+            {% endif %}
+            <parking><![CDATA[{{ entity.parking|default(0) }}]]></parking>
+            <city><![CDATA[{{ entity.city.name }}]]></city>
+            <city_area><![CDATA[{{ entity.situation.name }}]]></city_area>
+            {% if entity.area != '' %}
+                <region><![CDATA[{{ entity.area.name }}]]></region>
+            {% endif %}
+            <pictures>
+                <picture>
+                    <picture_url><![CDATA[{{ absolute_url(asset(entity.image.webPath)) }}]]></picture_url>
+                    <picture_title><![CDATA[{{ entity.title }}]]></picture_title>
+                </picture>
+                {% for photo in entity.photos %}
+                    <picture>
+                        <picture_url><![CDATA[{{ absolute_url(asset(photo.webPath)) }}]]></picture_url>
+                        <picture_title><![CDATA[{{ entity.title }}]]></picture_title>
+                    </picture>
+                {% endfor %}
+            </pictures>
+            <date><![CDATA[{{ entity.createdAt|date('d/m/Y') }}]]></date>
+            <time><![CDATA[{{ entity.createdAt|date('H:i') }}]]></time>
+        </ad>
+    {% endfor %}
+
+
+</Mitula>

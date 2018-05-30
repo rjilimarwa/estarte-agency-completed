@@ -1,0 +1,100 @@
+{% extends 'backOffice/base.html.twig' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">Utilisateurs</li>
+{% endblock breadcrumb %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Liste des utilisateurs</h3>
+                </div>
+
+                <!-- modal pour show -->
+                <div class="modal fade" id="myModalShow" role="dialog" tabindex="-1"
+                     aria-labelledby="demo-default-modal" aria-hidden="true">
+                </div>
+                <!-- fin modal show -->
+
+                <div class="panel-body">
+                    <main>
+                        <div id="load-ajax">
+                            <table
+                                    class="table table-hover table-vcenter toggle-circle table-striped breakpoint footable">
+                                <caption>Resultat: {{ entities.getTotalItemCount }} </caption>
+                                <thead>
+                                <tr>
+                                    <th class="col-lg-3">Nom</th>
+                                    <th class="col-lg-2">Lieu</th>
+                                    <th class="col-lg-2">Email</th>
+                                    <th class="col-lg-1 text-center">Mobile</th>
+                                    <th class="col-lg-2 text-center">Crée le</th>
+                                    <th class="col-lg-1 text-center">Etat</th>
+                                    <th class="col-lg-1 text-center" data-sort-ignore="true">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr id="new-element"></tr>
+                                {% for entity in entities %}
+                                    <tr class="item-to-hide">
+                                        <td href="{{ path('back_user_show', {'id': entity.id}) }}" class="with-loader"
+                                            data-remote="false" data-toggle="modal"
+                                            data-target="#myModalShow">{{ entity.uniqueName|title }}
+                                        </td>
+                                        <td href="{{ path('back_user_show', {'id': entity.id}) }}" class="with-loader"
+                                            data-remote="false" data-toggle="modal"
+                                            data-target="#myModalShow">
+                                            {{ entity.city.name|default('')|capitalize }} / {{ entity.area.name|default('')|capitalize }}
+                                        </td>
+                                        <td href="{{ path('back_user_show', {'id': entity.id}) }}" class="text-center with-loader"
+                                            data-remote="false" data-toggle="modal"
+                                            data-target="#myModalShow">{{ entity.email }}
+                                        </td>
+                                        <td href="{{ path('back_user_show', {'id': entity.id}) }}" class="text-center with-loader"
+                                            data-remote="false" data-toggle="modal"
+                                            data-target="#myModalShow">{{ entity.mobile }}
+                                        </td>
+                                        <td class="text-center">{{ entity.createdAt|localizeddate('medium', 'none', 'fr') }}</td>
+                                        <td>
+                                            {% if entity.enabled == '1' %}
+                                                <span class="badge badge-success">
+                                                    Activé <span class="fa fa-check"></span>
+                                                </span>
+                                            {% elseif entity.enabled == '0' %}
+                                                <span class="badge badge-danger">
+                                                    Désactivé <span class="fa fa-minus-circle"></span>
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ path('back_user_show', {'id': entity.id}) }}"
+                                               data-remote="false" data-toggle="modal"
+                                               data-target="#myModalShow"
+                                               class="add-tooltip tooltip-info"
+                                               data-placement="top" data-original-title="Voir">
+                                                <i class="fa fa-eye text-success bigger-130"></i>
+                                            </a>
+                                            &nbsp;&nbsp;&nbsp;
+                                            {% set route = path('back_user_state', {'id': entity.id}) %}
+                                            {{ entity.enabled|activate(route, entity.id, entity.enabled) }}
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <div class="dataTables_paginate paging_simple_numbers">
+                                {{ knp_pagination_render(entities) }}
+                            </div>
+                        </div>
+                    </main>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

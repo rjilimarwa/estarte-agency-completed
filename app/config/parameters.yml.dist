@@ -1,0 +1,20 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host: immobilirotn
+    database_port: null
+    database_name: name
+    database_user: user
+    database_password: mdp
+
+    mailer_transport: mail
+    mailer_host: 127.0.0.1
+    mailer_port: 587
+    mailer_user: contact@immobiliere.tn
+    mailer_password: mdp
+    mailer_auth_mode: login
+    mailer_user_no_reply: no-reply@immobiliere.tn
+    sender_name: Immobiliere.tn
+
+    secret: ThisTokenIsNotSoSecretChangeIt

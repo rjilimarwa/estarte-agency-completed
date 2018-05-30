@@ -1,0 +1,73 @@
+{% extends "back_office/base.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block page_title %} Mon profil {% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <li class="active">Changer le de passe</li>
+{% endblock %}
+
+{% block body %}
+    <div class="panel">
+
+        <div class="panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{% block page_heading %} Changer le mot de passe {% endblock %}</h3>
+            </div>
+        </div>
+
+        <div class="panel-body">
+
+
+            {{ form_start(form, { 'action': path('fos_user_change_password') }) }}
+
+            <div class="row">
+                <div class="col-sm-4">
+                    {{ form_label(form.current_password) }}
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                        {{ form_widget(form.current_password, { 'attr': {'class': 'form-control', 'placeholder': 'form.current_password'|trans}} ) }}
+                    </div>
+                    <span class="text-danger">{{ form_errors(form.current_password) }}&nbsp;</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    {{ form_label(form.plainPassword.first) }}
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'form.new_password'|trans}} ) }}
+                    </div>
+                    <span class="text-danger">{{ form_errors(form.plainPassword.first) }}&nbsp;</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+
+                    {{ form_label(form.plainPassword.second) }}
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans}} ) }}
+                    </div>
+                    <span class="text-danger">{{ form_errors(form.plainPassword.second) }}&nbsp;</span>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="form-group text-left">
+                        <input type="submit" class="btn btn-success text-uppercase" value="{{ 'change_password.submit'|trans }}">
+                    </div>
+                </div>
+
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock body %}

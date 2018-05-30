@@ -1,0 +1,23 @@
+back_city_list:
+    path:     /
+    defaults: { _controller: AppBundle:BackOffice\CityBack:list}
+
+back_city_new:
+    path:     /creer
+    defaults: { _controller: AppBundle:BackOffice\CityBack:new}
+
+back_city_edit:
+    path:     /modifier/{id}
+    defaults: { _controller: AppBundle:BackOffice\CityBack:edit}
+
+back_city_delete:
+    path:     /supprimer/{id}
+    defaults: { _controller: AppBundle:BackOffice\CityBack:delete}
+    methods:   [POST]
+    options:
+        expose: true
+
+back_city_search:
+    path:     /cherche
+    defaults: { _controller: AppBundle:BackOffice\CityBack:search}
+

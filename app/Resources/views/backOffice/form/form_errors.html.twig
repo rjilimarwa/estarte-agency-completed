@@ -1,0 +1,15 @@
+{% spaceless %}
+    {% if not form.vars.valid %}
+        <div class="row" style="margin-top: 20px; font-size: 16px;">
+            <div class="alert alert-danger fade in">
+                <button class="close" data-dismiss="alert"><span>×</span></button>
+                {{ form_errors(form) }}
+                {% for children in form.children %}
+                    {% if not children.vars.valid %}
+                        {{ form_errors(children) }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endspaceless %}

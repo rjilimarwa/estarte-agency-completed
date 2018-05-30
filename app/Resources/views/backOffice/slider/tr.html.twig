@@ -1,0 +1,85 @@
+<tr id="row-id-{{ entity.id }}" class="item-to-hide">
+
+    <td href="{{ path('back_slider_show', {'id': entity.id}) }}"
+        data-remote="false" data-toggle="modal"
+        data-target="#myModalShow">
+        <img src="{{ asset(entity.webPath|imagine_filter('standard_300_180')) }}">
+    </td>
+    <td>{{ entity.description|default('')|capitalize }}</td>
+    <td>
+        <div class="progress progress-bg">
+            <div class="progress-bar" style="width: 100%; border: 1px solid black; background-color: {{ entity.color|default('#ffffff')}}"></div>
+        </div>
+    </td>
+    <td>{{ entity.createdAt|date('d-m-Y') }}</td>
+    <td class="text-center">
+        <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+            <span class="pull-left">
+                {% set routeActive = path('back_slider_active', {'id': entity.id}) %}
+                {{ entity.active|activate(routeActive, entity.id, entity.active) }}
+            </span>
+            <span class="text-right">
+            <a href="{{ path('back_slider_show', {'id': entity.id}) }}"
+               data-remote="false" data-toggle="modal"
+               data-target="#myModalShow"
+               class="add-tooltip tooltip-info"
+               data-placement="top" data-original-title="Voir">
+                <i class="fa fa-eye text-success bigger-130"></i>
+            </a>
+            &nbsp;
+            <a href="{{ path('back_slider_edit', {'id': entity.id}) }}"
+               class="add-tooltip tooltip-info"
+               data-placement="top" data-original-title="Edit">
+                <i class="fa fa-pencil text-primary bigger-130"></i>
+            </a>
+            &nbsp;
+            <a href="{{ path('back_slider_delete', {'id': entity.id}) }}"
+               data-entity-id="{{ entity.id }}" class="add-tooltip tooltip-error remove-item"
+               data-placement="top" data-toggle="tooltip" data-original-title="Supprimer">
+                <i class="fa fa-trash text-danger bigger-130"></i>
+            </a>
+                </span>
+        </div>
+
+        <div class="visible-xs visible-sm hidden-md hidden-lg">
+            <div class="inline position-relative">
+                <button data-toggle="dropdown"
+                        class="btn btn-xs btn-primary dropdown-toggle dropdown-toggle-icon"
+                        type="button" aria-expanded="false"><i class="dropdown-caret fa fa-caret-down"></i>
+                </button>
+
+                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret
+                            dropdown-close">
+                    <li class="text-center">
+                        <a href="{{ path('back_slider_show', {'id': entity.id}) }}"
+                           data-remote="false" data-toggle="modal"
+                           data-target="#myModalShow"
+                           class="add-tooltip tooltip-info"
+                           data-placement="left" data-original-title="Voir">
+                            <i class="fa fa-eye text-primary bigger-130"></i>
+                        </a>
+                    </li>
+
+                    <li class="text-center">
+                        <a href="{{ path('back_slider_edit', {'id': entity.id}) }}"
+                           class="add-tooltip tooltip-info"
+                           data-placement="left" data-original-title="Edit">
+                            <i class="fa fa-pencil text-primary bigger-130"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('back_slider_delete', {'id': entity.id}) }}"
+                           class="add-tooltip tooltip-error remove-item"
+                           data-placement="left" data-toggle="tooltip" data-original-title="Supprimer">
+                            <span class="red">
+                                <i class="fa fa-trash text-danger bigger-130"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </td>
+</tr>

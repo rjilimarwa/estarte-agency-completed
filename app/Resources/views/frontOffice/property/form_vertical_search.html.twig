@@ -1,0 +1,99 @@
+<div class="form-group">
+    {{ form_widget(form_search.ref, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Réference'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.keyWord, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Que cherchez vous ?'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.operation, { 'attr': {'class': 'selectpickers form-control search-fields', 'placeholder': 'Opération'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.category, { 'attr': {'class': 'selectpickers form-control search-fields', 'placeholder': 'Type de bien'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.city, { 'attr': {'class': 'selectpickerr form-control search-fields city-search-vertical', 'placeholder': 'Ville'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.area, { 'attr': {'class': 'selectpickers form-control search-fields area-search', 'placeholder': 'Région'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.situation, { 'attr': {'class': 'selectpickers form-control search-fields', 'placeholder': 'Situation'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.priceMin, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Prix minimum', 'min': '0'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.priceMax, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Prix maximum', 'min': '0'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.roomNumberMin, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Chambres'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.roomNumberMax, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Chambres'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.floorAreaMin, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Superficie minimum', 'min': '0'}} ) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form_search.floorAreaMax, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Superficie maximum', 'min': '0'}} ) }}
+</div>
+
+{#    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                {{ form_widget(form_search.kitchenNumber, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Cuisines'}} ) }}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                {{ form_widget(form_search.bathRoomNumber, { 'attr': {'class': 'form-control search-fields', 'placeholder': 'Salle de bains'}} ) }}
+            </div>
+        </div>
+    </div>#}
+
+{#
+<a class="show-more-options" data-toggle="collapse" data-target="#options-content">
+    <i class="fa fa-plus-circle"></i> Afficher plus d'options
+</a>
+<div id="options-content" class="collapse">
+    #}
+{# <label class="margin-t-10">Features</label>#}{#
+
+    <div class="checkbox checkbox-theme checkbox-circle">
+        {{ form_widget(form_search.garden, { 'attr': {'class': ''}} ) }}
+        <label for="{{ form_search.garden.vars.id }}">Jardin</label>
+    </div>
+    <div class="checkbox checkbox-theme checkbox-circle">
+        {{ form_widget(form_search.garage, { 'attr': {'class': ''}} ) }}
+        <label for="{{ form_search.garage.vars.id }}">Garage</label>
+    </div>
+    <div class="checkbox checkbox-theme checkbox-circle">
+        {{ form_widget(form_search.parking, { 'attr': {'class': ''}} ) }}
+        <label for="{{ form_search.parking.vars.id }}">Parking</label>
+    </div>
+    <div class="checkbox checkbox-theme checkbox-circle">
+        {{ form_widget(form_search.airConditioner, { 'attr': {'class': ''}} ) }}
+        <label for="{{ form_search.airConditioner.vars.id }}">Climatisation</label>
+    </div>
+    <div class="checkbox checkbox-theme checkbox-circle">
+        {{ form_widget(form_search.heating, { 'attr': {'class': ''}} ) }}
+        <label for="{{ form_search.heating.vars.id }}">Chauffage</label>
+    </div>
+    <div class="checkbox checkbox-theme checkbox-circle">
+        {{ form_widget(form_search.alarmSystem, { 'attr': {'class': ''}} ) }}
+        <label for="{{ form_search.alarmSystem.vars.id }}">Systéme alarme</label>
+    </div>
+    <div class="checkbox checkbox-theme checkbox-circle">
+        {{ form_widget(form_search.elevator, { 'attr': {'class': ''}} ) }}
+        <label for="{{ form_search.elevator.vars.id }}">Ascenseur</label>
+    </div>
+    <div class="checkbox checkbox-theme checkbox-circle">
+        {{ form_widget(form_search.swimmingPool, { 'attr': {'class': ''}} ) }}
+        <label for="{{ form_search.swimmingPool.vars.id }}">Piscine</label>
+    </div>
+</div>
+#}
+
+<div class="form-group">
+    <button type="submit" class="search-button">Chercher</button>
+</div>

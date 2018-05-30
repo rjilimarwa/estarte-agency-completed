@@ -1,0 +1,73 @@
+<tr id="row-id-{{ entity.id }}" class="row-id-{{ entity.id }}">
+
+    <td href="{{ path('back_registration_show', {'id': entity.id}) }}"
+        data-remote="false" data-toggle="modal"
+        data-target="#myModalShow">{{ entity.uniqueName|title }}</td>
+    <td>{{ entity.email }}</td>
+    <td>{{ entity.mobile }}</td>
+    <td>{{ entity.country.nameFr|default('')|capitalize }}</td>
+    <td>{{ entity.city|default('')|capitalize }}</td>
+    <td>{{ entity.createdAt|date('d-m-Y') }}</td>
+    <td class="text-center">
+        <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+            {% if entity.archived == false %}
+                <a href="{{ path('back_registration_show_validate_form', {'id': entity.id}) }}"
+                   data-remote="false" data-toggle="modal"
+                   data-target="#myModalValidate"
+                   class="add-tooltip tooltip-info"
+                   data-placement="top" data-original-title="Traiter">
+                    <i class="fa fa-cog text-info bigger-130"></i>
+                </a>
+                &nbsp;
+            {% endif %}
+            <span class="text-right">
+            <a href="{{ path('back_registration_show', {'id': entity.id}) }}"
+               data-remote="false" data-toggle="modal"
+               data-target="#myModalShow"
+               class="add-tooltip tooltip-info"
+               data-placement="top" data-original-title="Voir">
+                <i class="fa fa-eye text-success bigger-130"></i>
+            </a>
+            &nbsp;
+            <a href="{{ path('back_registration_delete', {'id': entity.id}) }}"
+               data-entity-id="{{ entity.id }}" class="add-tooltip tooltip-error remove-item"
+               data-placement="top" data-toggle="tooltip" data-original-title="Supprimer">
+                <i class="fa fa-trash text-danger bigger-130"></i>
+            </a>
+                </span>
+        </div>
+
+        <div class="visible-xs visible-sm hidden-md hidden-lg">
+            <div class="inline position-relative">
+                <button data-toggle="dropdown"
+                        class="btn btn-xs btn-primary dropdown-toggle dropdown-toggle-icon"
+                        type="button" aria-expanded="false"><i class="dropdown-caret fa fa-caret-down"></i>
+                </button>
+
+                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret
+                            dropdown-close">
+                    <li class="text-center">
+                        <a href="{{ path('back_registration_show', {'id': entity.id}) }}"
+                           data-remote="false" data-toggle="modal"
+                           data-target="#myModalShow"
+                           class="add-tooltip tooltip-info"
+                           data-placement="left" data-original-title="Voir">
+                            <i class="fa fa-eye text-primary bigger-130"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('back_registration_delete', {'id': entity.id}) }}"
+                           class="add-tooltip tooltip-error remove-item"
+                           data-placement="left" data-toggle="tooltip" data-original-title="Supprimer">
+                            <span class="red">
+                                <i class="fa fa-trash text-danger bigger-130"></i>
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </td>
+</tr>

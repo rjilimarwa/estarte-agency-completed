@@ -1,0 +1,136 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="" method="post" enctype="multipart/form-data">
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="{{ form.email.vars.id }}">{{ 'form.email'|trans }} <i class="text-danger">*</i></label>
+            {{ form_widget(form.email, { 'attr': {'class': 'input-text'}} ) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="{{ form.company.corporateName.vars.id }}">
+                Raison social
+                <small><i>(Nom entreprise)</i></small> <i class="text-danger">*</i>
+            </label>
+            {{ form_widget(form.company.corporateName, { 'attr': {'class': 'input-text'}} ) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="{{ form.company.address.vars.id }}">
+                Adresse <i class="text-danger">*</i>
+            </label>
+            {{ form_widget(form.company.address, { 'attr': {'class': 'input-text form-control'}} ) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="{{ form.company.postCode.vars.id }}">
+                Code Postal <i class="text-danger">*</i>
+            </label>
+            {{ form_widget(form.company.postCode, { 'attr': {'class': 'input-text form-control'}} ) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="{{ form.city.vars.id }}">
+                Ville <i class="text-danger">*</i>
+            </label>
+            {{ form_widget(form.city, { 'attr': {'class': 'selectpickerr search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': 'Chercher ville'}} ) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="{{ form.area.vars.id }}">
+                Région <i class="text-danger">*</i>
+            </label>
+            {{ form_widget(form.area, { 'attr': {'class': 'selectpickers search-fieldss form-control', 'data-live-search': 'true', 'data-live-search-placeholder': 'Chercher région'}} ) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="{{ form.company.mobile.vars.id }}">
+                Tél mobile <i class="text-danger">*</i>
+            </label>
+            {{ form_widget(form.company.mobile, { 'attr': {'class': 'input-text form-control'}} ) }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="{{ form.company.logo.vars.id }}">
+                Logo <i class="text-danger">*</i>
+            </label>
+            {{ form_widget(form.company.logo, { 'attr': {'class': 'input-text form-control'}} ) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="{{ form.plainPassword.first.vars.id }}">{{ 'form.password'|trans }} <i class="text-danger">*</i></label>
+            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'input-text form-control'}} ) }}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="{{ form.plainPassword.second.vars.id }}">{{ 'form.password_confirmation'|trans }} <i class="text-danger">*</i></label>
+            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'input-text form-control'}} ) }}
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <div class="checkbox checkbox-theme checkbox-circle" style="margin: 0;">
+                <input type="checkbox" id="terms-conditions" required="required">
+                <label for="terms-conditions">J'accepte</label>&nbsp;
+                <a href="{{ path('front_office_terms_conditions') }}" target="_blank" class="text-base-color">les conditions d'utilisation</a>
+            </div>
+        </div>
+    </div>
+    {{ form_rest(form) }}
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group">
+            <button type="submit"
+                    class="button-md button-theme">{{ 'registration.submit'|trans }}</button>
+        </div>
+    </div>
+</div>
+
+</form>
+
+<script>
+    var $city = $('#fos_user_registration_form_city');
+    // When sport gets selected ...
+    $city.change(function() {
+        // ... retrieve the corresponding form.
+        var $form = $(this).closest('form');
+        // Simulate form data, but only include the selected sport value.
+        var data = {};
+        data[$city.attr('name')] = $city.val();
+        // Submit data via AJAX to the form's action path.
+        $.ajax({
+            url : $form.attr('action'),
+            type: 'POST',
+            data : data,
+            success: function(html) {
+                console.log(html);
+                // Replace current position field ...
+                $('#fos_user_registration_form_area').replaceWith(
+                    // ... with the returned one from the AJAX response.
+                    $(html).find('#fos_user_registration_form_area')
+                );
+                // Position field now displays the appropriate positions.
+            }
+        });
+    });
+</script>

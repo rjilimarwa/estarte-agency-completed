@@ -1,0 +1,58 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999999">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-md">
+            <div class="modal-header" style="background-color: ghostwhite">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="font-size: 24px;" class="base-color">&times;</span></button>
+                <h4 class="modal-title base-color" style="position: inherit" id="myModalLabel">Connexion</h4>
+            </div>
+            <div class="submit-address">
+            <form action="{{ path("fos_user_security_check") }}" method="post" class="form">
+                <div class="modal-body">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+                    <div class="form-group">
+                        <label for="username">Email</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}"
+                               required="required" class="input-text form-control"
+                               placeholder="{{ 'security.login.username'|trans }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">{{ 'security.login.password'|trans }}</label>
+                        <input type="password" id="password" name="_password" required="required"
+                               class="input-text form-control"
+                               placeholder="{{ 'security.login.password'|trans }}">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left">
+                            <label class="form-checkbox form-icon form-text">
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="1">
+                                <span class=" text-bold" style="font-size: 12px;">
+                                {{ 'security.login.remember_me'|trans }}
+                                    </span>
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group text-right">
+                                <a href="{{ path('fos_user_resetting_request') }}" class="text-bold" style="font-size: 12px;">
+                                    Mot depasse oublié ?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn button-theme" id="_submit" name="_submit"
+                            data-loading-text="Connexion">
+                        {{ 'security.login.submit'|trans }}
+                    </button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>

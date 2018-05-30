@@ -1,0 +1,95 @@
+{% extends "back_office/base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block page_title %} Mon profil {% endblock %}
+
+{% block breadcrumb_content %}
+    {{ parent() }}
+    <li class="active">Mon profil</li>
+{% endblock %}
+
+{% block body %}
+    <div class="panel">
+
+        <div class="panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{% block page_heading %} Modifier mes informations {% endblock %}</h3>
+            </div>
+        </div>
+
+        <div class="panel-body">
+
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_profile_edit') }) }}
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {{ form_label(form.administrator.firstName) }}
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                            {{ form_widget(form.administrator.firstName, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans}} ) }}
+                        </div>
+                        <span class="text-danger">{{ form_errors(form.administrator.firstName) }}&nbsp;</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {{ form_label(form.administrator.lastName) }}
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                            {{ form_widget(form.administrator.lastName, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans}} ) }}
+                        </div>
+                        <span class="text-danger">{{ form_errors(form.administrator.lastName) }}&nbsp;</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {{ form_label(form.email) }}
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                            {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'form.email'|trans}} ) }}
+                        </div>
+                        <span class="text-danger">{{ form_errors(form.email) }}&nbsp;</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {{ form_label(form.administrator.mobile) }}
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                            {{ form_widget(form.administrator.mobile, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans}} ) }}
+                        </div>
+                        <span class="text-danger">{{ form_errors(form.administrator.mobile) }}&nbsp;</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        {{ form_label(form.current_password) }}
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                            {{ form_widget(form.current_password, { 'attr': {'class': 'form-control'}} ) }}
+                        </div>
+                        <span class="text-danger">{{ form_errors(form.current_password) }}&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+
+            {{ form_rest(form) }}
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group text-left">
+                        <input type="submit" class="btn btn-success text-uppercase" value="{{ 'profile.edit.submit'|trans }}">
+                    </div>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock body %}

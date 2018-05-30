@@ -1,0 +1,224 @@
+{% extends 'frontOffice/base.html.twig' %}
+{% block keywords %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}
+    {% if category is defined %}{{ category.name|title }} - {{ parent() }}
+    {% else %}
+        Liste des annonces - {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1 id="page-title">
+                            {% if category is defined %}{{ category.name }}
+                            {% else %}
+                                Liste des annonces
+                            {% endif %}
+                        </h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Liste des annonces</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Properties section body start -->
+    <div class="properties-section-body content-area" id="scroll-to">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-xs-12 col-md-push-4" id="load-ajax">
+                    <!-- Option bar start -->
+                    <div class="option-bar">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-2">
+                                <h4>
+                                <span class="heading-icon">
+                                    <i class="fa fa-th-large"></i>
+                                </span>
+                                    <span class="hidden-xs text-16">
+                                        {% if entities.getTotalItemCount <= 1 %}
+                                            {{ entities.getTotalItemCount~' annonce trouvé' }}
+                                        {% else %}
+                                            {{ entities.getTotalItemCount~' annonces trouvés' }}
+                                        {% endif %}
+                                        {% if category is defined %} dans {{ category.name|capitalize }}{% endif %}
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10 cod-pad">
+                                <div class="sorting-options pull-right">
+                                    <div class="dropdown">
+                                        Trier par
+                                        <button class="btn-default button" id="dLabel" type="button"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false"
+                                                style="border: 1px solid #1abc9c">
+                                            {% if app.request.get('sort') == 'p.id' and app.request.get('direction') == 'desc' %}
+                                                Nouveautés
+                                            {% elseif app.request.get('sort') == 'e.price' and app.request.get('direction') == 'asc' %}Prix croissant
+                                            {% elseif app.request.get('sort') == 'e.price' and app.request.get('direction') == 'desc' %}Prix décroissant
+                                            {% elseif app.request.get('sort') == 'ci.name' and app.request.get('direction') == 'asc' %}Ville A à Z
+                                            {% elseif app.request.get('sort') == 'ci.name' and app.request.get('direction') == 'desc' %}Ville Z à A
+                                            {% else %}
+                                                Nouveautés
+                                            {% endif %}
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-sort-by" aria-labelledby="dLabel"
+                                            style="right: 0;">
+                                            <li>{{ knp_pagination_sortable(entities, 'Nouveautés', 'e.id', {'direction': 'desc'}) }}</li>
+                                            <li>{{ knp_pagination_sortable(entities, 'Prix croissant', 'e.price', {'direction': 'asc'}) }}</li>
+                                            <li>{{ knp_pagination_sortable(entities, 'Prix décroissant', 'e.price', {'direction': 'desc'}) }}</li>
+                                            <li>{{ knp_pagination_sortable(entities, 'Ville A à Z', 'ci.name', {'direction': 'asc'}) }}</li>
+                                            <li>{{ knp_pagination_sortable(entities, 'Ville Z à A', 'ci.name', {'direction': 'desc'}) }}</li>
+                                        </ul>
+                                    </div>
+                                    {#<a href="" class="change-view-btn"><i class="fa fa-th-list"></i></a>
+                                    <a href="" class="change-view-btn active-view-btn"><i class="fa fa-th-large"></i></a>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Option bar end -->
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        {% for entity in entities %}
+                            <div class="col-lg-6 col-md-6 col-sm-6 wow fadeInUp delay-03s">
+                                <!-- Recent properties box start -->
+                                <div class="thumbnail recent-properties-box">
+                                    <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}">
+                                        <img src="{{ asset(entity.image.webPath|imagine_filter('standard_850_592')) }}"
+                                             alt="properties-1" class="img-responsive">
+                                    </a>
+                                    <!-- Detail -->
+                                    <div class="caption detail">
+                                        <!-- Header -->
+                                        <header>
+                                            <div class="pull-left">
+                                                <h1 class="title" style="font-size: 13px;">
+                                                    <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}">
+                                                        {{ entity.category.name|capitalize~' '~entity.operation.title }}
+                                                    </a>
+                                                </h1>
+                                            </div>
+                                            <!-- Price -->
+                                            <div class="price" style="font-size: 13px;">
+                                                {% if entity.displayPrice %}{{ entity.price|number_format(0, ' ', ' ')~' DT' }} {% if entity.operation.alias == 'loc' %}/ mois {% endif %}
+                                                {% else %}&nbsp;
+                                                {% endif %}
+                                            </div>
+                                        </header>
+                                        <!-- Location -->
+                                        <h3 class="location">
+                                            <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}" style="font-size: 14px;">
+                                                <i class="fa fa-map-marker"></i>{{ entity.city.name~', '~entity.area.name}}
+                                            </a>
+                                        </h3>
+                                        <!-- Facilities List -->
+                                        <ul class="facilities-list clearfix">
+                                            <li class="bordered-right">
+                                                <i class="fa fa-map-marker"></i> {{ entity.situation.name|capitalize }}
+                                            </li>
+                                            <li class="bordered-right">
+                                                <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
+                                                <span>{{ entity.floorArea }} m<sup>2</sup></span>
+                                            </li>
+                                            {% if entity.roomNumber != 0 or entity.roomNumber != null %}
+                                                <li>
+                                                    <i class="flaticon-bed"></i>&nbsp;<span>{{ entity.roomNumber }}
+                                                        chambres</span>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                        <p class="text-center margin-t-5">
+                                            {{ include('frontOffice/property/add_to_favorite.html.twig') }}
+                                        </p>
+                                        <!-- Footer -->
+                                        <div class="footer">
+                                            <a href="#">
+                                                <i class="fa fa-user"></i> {{ entity.user.uniqueName|title }}
+                                            </a>
+                                            <span>
+                                        <i class="fa fa-calendar-o"></i> {{ entity.createdAt|localizeddate('medium', 'none', 'fr') }}
+                                    </span>
+                                        </div>
+                                    </div>
+                                    <!-- Tag -->
+                                    <span class="tag-f">
+                                <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}">
+                                    {{ entity.ref|upper }}
+                                </a>
+                            </span>
+                                    {#<span class="tag-s">
+                                        <a href="properties-details.html">For Sale</a>
+                                    </span>#}
+                                </div>
+                                <!-- Recent properties box end -->
+                            </div>
+                        {% else %}
+                            <div class="alert alert-warning">
+                                <p class="text-13"> 0 résultat trouvé!</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Page navigation start -->
+                    <nav aria-label="Page navigation">
+                        {{ knp_pagination_render(entities) }}
+                    </nav>
+                    <!-- Page navigation end-->
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12 col-md-pull-8">
+                    <!-- Search contents sidebar start -->
+                    <div class="sidebar sidebar-widget">
+                        <h3 class="title">chercher</h3>
+                        <form action="{{ path('front_properties_search') }}" method="get" id="search-form">
+                            {{ render(controller('AppBundle:FrontOffice/PropertyFront:verticalSearchForm')) }}
+                        </form>
+                    </div>
+                    <!-- Search contents sidebar end -->
+
+                    <!-- Helping Center Start -->
+                    <div class="sidebar sidebar-widget helping-center">
+                        <h3 class="title">BESOIN D'AIDE ?</h3>
+                        <p>Appelez nous ou bien laissez nous un message et notre consultant vous contactera.</p>
+                        <ul class="contact-link">
+                            <li>
+                                <i class="fa fa-phone"></i>
+                                +216 31 553 901
+                            </li>
+                            <li>
+                                <i class="fa fa-mobile"></i>
+                                +216 95 631 100
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i>
+                                <a href="mailto:contact@immobiliere.tn">
+                                    contact@immobiliere.tn
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Helping Center Start -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Properties section body end -->
+
+
+{% endblock %}

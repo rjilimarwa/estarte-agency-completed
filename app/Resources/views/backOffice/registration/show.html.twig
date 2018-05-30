@@ -1,0 +1,83 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <!--Modal header-->
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title text-center">Détail inscription</h4>
+        </div>
+
+        <!--Modal body-->
+        <div class="modal-body">
+            <table class="table table-striped">
+                <tr>
+                    <td class="td-title">Nom et prénom:</td>
+                    <td class="td-val">{{ entity.uniqueName|title }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Civilité:</td>
+                    <td class="td-val">{{ entity.civility|capitalize }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Email:</td>
+                    <td class="td-val">{{ entity.email }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Téléphone:</td>
+                    <td class="td-val">{{ entity.phone|default('') }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Mobile:</td>
+                    <td class="td-val">{{ entity.mobile|default('') }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Fax:</td>
+                    <td class="td-val">{{ entity.fax|default('') }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Adresse:</td>
+                    <td class="td-val">{{ entity.address|default('') }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Ville:</td>
+                    <td class="td-val">{{ entity.city|default('')|capitalize }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Pays:</td>
+                    <td class="td-val">{{ entity.country.nameFr|default('')|title }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Code postal:</td>
+                    <td class="td-val">{{ entity.postCode|default('') }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Raison social:</td>
+                    <td class="td-val">{{ entity.corporateName|default('')|capitalize }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Activité:</td>
+                    <td class="td-val">{{ entity.activity|default('')|capitalize }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Matricule fiscal:</td>
+                    <td class="td-val">{{ entity.taxRegistrationNumber|default('') }}</td>
+                </tr>
+                <tr>
+                    <td class="td-title">Inscri le:</td>
+                    <td class="td-val">{{ entity.createdAt|date('d-m-Y') }}</td>
+                </tr>
+
+
+            </table>
+        </div>
+
+        <!--Modal footer-->
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-primary" type="button">
+                Fermer
+            </button>
+        </div>
+    </div>
+</div>
+

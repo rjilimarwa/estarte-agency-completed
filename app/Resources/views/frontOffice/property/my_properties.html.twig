@@ -1,0 +1,221 @@
+{% extends 'frontOffice/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <!-- Sub banner start -->
+    <div class="sub-banner">
+        <div class="overlay">
+            <div class="container">
+                <div class="breadcrumb-area">
+                    <div class="top">
+                        <h1>Mon compte</h1>
+                    </div>
+                    <ul class="breadcrumbs">
+                        <li><a href="{{ path('front_office_homepage') }}">Accueil</a></li>
+                        <li class="active">Mes annonces</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sub Banner end -->
+
+    <!-- My Propertiess start -->
+    <div class="my-propertiess">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-4">
+                <!-- My account box start -->
+                {{ include('@FOSUser/Profile/left_side_bar.html.twig') }}
+                <!-- My account box end -->
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-8">
+                <h1 class="heading">Mes annonces</h1>
+                {% for entity in entities %}
+                    <div class="my-properties-box wow fadeInUp clearfix row-id-{{ entity.id }}" style="z-index: 10">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-pad my-propertie-theme">
+                            <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}">
+                                <img src="{{ asset(entity.image.webPath|default('')) }}"
+                                     alt="my-properties-1" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 col-pad">
+                            <div class="detail">
+                                <!-- Header -->
+                                <header class="clearfix">
+                                    <div class="pull-left">
+                                        <h1 class="title">
+                                            <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}">
+                                                {{ entity.category.name~' '~entity.operation.title|capitalize }}
+                                            </a>
+                                            {% if entity.state == 'valid' %}
+                                                <button type="button" class="btn btn-success btn-xs">
+                                                    Validé <span class="fa fa-check"></span>
+                                                </button>
+                                            {% elseif entity.state == 'waiting' %}
+                                                <button type="button" class="btn btn-warning btn-xs">
+                                                    En attente <span class="fa fa-hourglass-half"></span>
+                                                </button>
+                                            {% elseif entity.state == 'rejected' %}
+                                                <button type="button" class="btn btn-danger btn-xs">
+                                                    Rejeté <span class="fa fa-minus-circle"></span>
+                                                </button>
+                                            {% endif %}
+                                        </h1>
+                                        <h3 class="location" style="font-size: 14px;">
+                                            <a href="#">
+                                                <i class="fa fa-map-marker"></i>
+                                                {{ entity.city.name~', '~entity.area.name~': '~entity.situation.name|title }}
+                                            </a>
+                                        </h3>
+                                    </div>
+                                    <!-- Btn -->
+                                    <div class="pull-right">
+
+                                        <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}" class="button-sm button-theme">Details</a>
+                                    </div>
+                                </header>
+                                <hr>
+                                <p style="min-height: 40px; max-height: 40px; overflow: hidden">
+                                    <strong>{{ entity.title|capitalize }}
+                                        : </strong>{{ entity.description|capitalize|slice(0,300) }}
+                                </p>
+                            </div>
+                            <!-- footer -->
+                            <div class="footer clearfix">
+                                <div class="col-md-3 col-sm-3 col-xs-3">
+                                    <div class="price">
+                                        {{ entity.price }} DT {% if entity.operation.alias == 'loc' %}/ mois {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-3">
+                                    <div class="date">
+                                        {{ entity.createdAt|localizeddate('medium', 'none', 'fr') }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="listing-meta hidden-xs">
+                                    <span>
+                                        <a href="{{ path('front_my_properties_edit', {'token': entity.token}) }}"
+                                           data-toggle="tooltip" data-placement="top" title="Modifier annonce">
+                                            <i class="fa fa-pencil"></i>Edit
+                                        </a>
+                                    </span>
+                                        <span>
+                                            {% if entity.active == 0 %}
+                                                <a href="{{ path('front_my_properties_active', {'token': entity.token}) }}"
+                                                   data-toggle="tooltip" data-placement="top" title="Publier l'annonce"
+                                                   data-entity-id="{{ entity.id }}"
+                                                   class="unlock unlock-{{ entity.id }}"
+                                                   id="unlock-{{ entity.id }}">
+                                                    <i class="fa fa-eye"></i>Publier
+                                                </a>
+                                                <a href="{{ path('front_my_properties_active', {'token': entity.token}) }}"
+                                                   data-toggle="tooltip" data-placement="top" title="Cacher l'annonce"
+                                                   data-entity-id="{{ entity.id }}" class="lock lock-{{ entity.id }}"
+                                                   style="display: none"
+                                                   id="lock-{{ entity.id }}">
+                                                    <i class="fa fa-eye-slash"></i>Cacher
+                                                </a>
+                                        {% else %}
+                                                <a href="{{ path('front_my_properties_active', {'token': entity.token}) }}"
+                                                   data-toggle="tooltip" data-placement="top" title="Cacher l'annonce"
+                                                   data-entity-id="{{ entity.id }}" class="lock lock-{{ entity.id }}"
+                                                   id="lock-{{ entity.id }}">
+                                                    <i class="fa fa-eye-slash"></i>Cacher
+                                                </a>
+                                                <a href="{{ path('front_my_properties_active', {'token': entity.token}) }}"
+                                                   data-toggle="tooltip" data-placement="top" title="Publier l'annonce"
+                                                   data-entity-id="{{ entity.id }}"
+                                                   class="unlock unlock-{{ entity.id }}" style="display: none"
+                                                   id="unlock-{{ entity.id }}">
+                                                    <i class="fa fa-eye"></i>Publier
+                                                </a>
+                                            {% endif %}
+                                    </span>
+                                        <span>
+                                        <a href="{{ path('front_my_properties_delete', {'token': entity.token}) }}"
+                                           data-entity-id="{{ entity.id }}"
+                                           data-toggle="tooltip" data-placement="top" title="Supprimer annonce"
+                                           data-original-title="Supprimer" class="remove-item">
+                                            <i class="fa fa-remove"></i>Supp
+                                        </a>
+                                    </span>
+                                    </div>
+                                    <div class="dropdown visible-xs pull-right">
+                                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false">
+                                            <i class="fa fa-gear fa-2x"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                            <li>
+                                                <a href="{{ path('front_my_properties_edit', {'token': entity.token}) }}"
+                                                   data-toggle="tooltip" data-placement="top" title="Modifier annonce">
+                                                    <i class="fa fa-pencil"></i> Edit
+                                                </a>
+                                            </li>
+                                            <li>
+                                                {% if entity.active == 0 %}
+                                                    <a href="{{ path('front_my_properties_active', {'token': entity.token}) }}"
+                                                       data-toggle="tooltip" data-placement="top"
+                                                       title="Publier l'annonce"
+                                                       data-entity-id="{{ entity.id }}"
+                                                       class="unlock unlock-{{ entity.id }}"
+                                                       id="unlock-{{ entity.id }}">
+                                                        <i class="fa fa-eye"></i> Publier
+                                                    </a>
+                                                    <a href="{{ path('front_my_properties_active', {'token': entity.token}) }}"
+                                                       data-toggle="tooltip" data-placement="top"
+                                                       title="Cacher l'annonce"
+                                                       data-entity-id="{{ entity.id }}"
+                                                       class="lock lock-{{ entity.id }}" style="display: none"
+                                                       id="lock-{{ entity.id }}">
+                                                        <i class="fa fa-eye-slash"></i> Cacher
+                                                    </a>
+                                                {% else %}
+                                                    <a href="{{ path('front_my_properties_active', {'token': entity.token}) }}"
+                                                       data-toggle="tooltip" data-placement="top"
+                                                       title="Cacher l'annonce"
+                                                       data-entity-id="{{ entity.id }}"
+                                                       class="lock lock-{{ entity.id }}"
+                                                       id="lock-{{ entity.id }}">
+                                                        <i class="fa fa-eye-slash"></i> Cacher
+                                                    </a>
+                                                    <a href="{{ path('front_my_properties_active', {'token': entity.token}) }}"
+                                                       data-toggle="tooltip" data-placement="top"
+                                                       title="Publier l'annonce"
+                                                       data-entity-id="{{ entity.id }}"
+                                                       class="unlock unlock-{{ entity.id }}" style="display: none"
+                                                       id="unlock-{{ entity.id }}">
+                                                        <i class="fa fa-eye"></i> Publier
+                                                    </a>
+                                                {% endif %}
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('front_my_properties_delete', {'token': entity.token}) }}"
+                                                   data-entity-id="{{ entity.id }}"
+                                                   data-toggle="tooltip" data-placement="top" title="Supprimer annonce"
+                                                   data-original-title="Supprimer" class="remove-item">
+                                                    <i class="fa fa-remove"></i> Supp
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <!-- Page navigation start -->
+                <nav aria-label="Page navigation">
+                    {{ knp_pagination_render(entities) }}
+                </nav>
+                <!-- Page navigation end-->
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

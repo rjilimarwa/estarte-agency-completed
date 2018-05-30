@@ -1,0 +1,37 @@
+{# form_theme doit etre declaré avant form_erros #}
+{% form_theme form 'backOffice/form/base_form.html.twig' %}
+
+<div class="modal fade" id="myModalAdd" role="dialog" tabindex="-1"
+     aria-labelledby="demo-default-modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!--Modal header-->
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center">Ajouter une ville</h4>
+            </div>
+
+            <!--Modal body-->
+            <div class="modal-body">
+                <div class="block-erreurs"></div>
+
+                <form class="form-add-ajax" method="post" action="{{ path('back_office_area_new') }}"
+                      enctype="multipart/form-data">
+
+                    {{ include('backOffice/area/form_content.html.twig') }}
+
+                </form>
+
+            </div>
+
+            <!--Modal footer-->
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-primary" type="button">
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

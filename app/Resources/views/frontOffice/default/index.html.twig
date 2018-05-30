@@ -1,0 +1,241 @@
+{% extends 'frontOffice/base.html.twig' %}
+{% block title %}Accueil {{ parent() }}{% endblock %}
+{% block body %}
+    {{ include('frontOffice/includes/slider.html.twig') }}
+    {# this form is visible only for xs#}
+    <!-- Search Section start -->
+    <div class="search-section hidden-sm hidden-md hidden-lg">
+        <div class="container">
+            <div class="search-section-area">
+                <div class="search-area-inner">
+                    <div class="search-contents show-search-area">
+                        <div class="row">
+                            {{ render(controller('AppBundle:FrontOffice/PropertyFront:horizontalMiniSearchForm')) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search Section end -->
+    <!-- Recent properties start -->
+    <div class="recent-properties">
+        <div class="container">
+            <!-- Main title -->
+            <div class="main-title">
+                <h1>Derniers annonces</h1>
+                <div class="border">
+                    <div class="border-inner"></div>
+                </div>
+                {#
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac tortor at tellus feugiat congue quis ut nunc. Semper ac dolor vitae accumsan. interdum hendrerit lacinia.</p>
+                #}
+            </div>
+
+            <div class="row">
+                {% for entity in latestProperties %}
+                    <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInUp delay-03s">
+                        <!-- Recent properties box start -->
+                        <div class="thumbnail recent-properties-box">
+                            <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}">
+                                <img src="{{ asset(entity.image.webPath|imagine_filter('standard_850_592')) }}"
+                                     alt="properties-1" class="img-responsive">
+                            </a>
+                            <!-- Detail -->
+                            <div class="caption detail">
+                                <!-- Header -->
+                                <header>
+                                    <div class="pull-left">
+                                        <h1 class="title" style="font-size: 13px;">
+                                            <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}">
+                                                {{ entity.category.name|capitalize~' '~entity.operation.title }}
+                                            </a>
+                                        </h1>
+                                    </div>
+                                    <!-- Price -->
+                                    <div class="price" style="font-size: 13px;">
+                                        {% if entity.displayPrice %}
+                                            {{ entity.price|number_format(0, ' ', ' ')~' DT' }} {% if entity.operation.alias == 'loc' %}/ mois {% endif %}
+                                        {% else %}
+                                            &nbsp;
+                                        {% endif %}
+                                    </div>
+                                </header>
+                                <!-- Location -->
+                                <h3 class="location">
+                                    <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}" style="font-size: 14px;">
+                                        <i class="fa fa-map-marker"></i>{{ entity.city.name~', '~entity.area.name }}
+                                    </a>
+                                </h3>
+                                <!-- Facilities List -->
+                                <ul class="facilities-list clearfix">
+                                    <li class="bordered-right">
+                                        <i class="fa fa-map-marker"></i> {{ entity.situation.name|capitalize }}
+                                    </li>
+                                    <li class="bordered-right">
+                                        <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
+                                        <span>{{ entity.floorArea }} m<sup>2</sup></span>
+                                    </li>
+                                    {% if entity.roomNumber != 0 or entity.roomNumber != null %}
+                                        <li>
+                                            <i class="flaticon-bed"></i>&nbsp;<span>{{ entity.roomNumber }}
+                                                chambres</span>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                                <p class="text-center margin-t-5">
+                                    {{ include('frontOffice/property/add_to_favorite.html.twig') }}
+                                </p>
+                                <!-- Footer -->
+                                <div class="footer">
+                                    <a href="#">
+                                        <i class="fa fa-user"></i> {{ entity.user.uniqueName|title }}
+                                    </a>
+                                    <span>
+                                        <i class="fa fa-calendar-o"></i> {{ entity.createdAt|localizeddate('medium', 'none', 'fr') }}
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Tag -->
+                            <span class="tag-f">
+                                <a href="{{ path('front_office_property_show', {'slug': entity.slug}) }}">
+                                    {{ entity.ref|upper }}
+                                </a>
+                            </span>
+                            {#<span class="tag-s">
+                                <a href="properties-details.html">For Sale</a>
+                            </span>#}
+                        </div>
+                        <!-- Recent properties box end -->
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row text-center">
+                <a href="{{ path('front_list_all_properties') }}" class="btn button-md button-theme">Voir Tous</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section-1 start -->
+    <div class="section-1 looking-for">
+        <div class="container">
+            <!-- Main title -->
+            <div class="main-title">
+                <h1>Que cherchez-vous?</h1>
+                <div class="border">
+                    <div class="border-inner"></div>
+                </div>
+                <p>Voici la liste des catégories les plus populaires. En cliquant sur une catégorie, vous allez
+                    trouver
+                    la liste des annonces qui la concerne.</p>
+            </div>
+
+            <div class="row mgn-btm wow">
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 wow fadeInLeft delay-04s">
+                    <a href="{{ path('front_list_by_category__properties', {'category_slug': 'appartement'}) }}">
+                        <div class="content">
+                            <i class="flaticon-apartment"></i>
+                            <h4>Appartements</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 wow fadeInLeft delay-04s">
+                    <a href="{{ path('front_list_by_category__properties', {'category_slug': 'maison'}) }}">
+                        <div class="content">
+                            <i class="flaticon-internet"></i>
+                            <h4>Maisons</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 wow fadeInLeft delay-04s">
+                    <a href="{{ path('front_list_by_category__properties', {'category_slug': 'ferme'}) }}">
+                        <div class="content">
+                            <i class="glyphicon glyphicon-tree-deciduous"></i>
+                            <h4>Fermes</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 wow fadeInLeft delay-04s">
+                    <a href="{{ path('front_list_by_category__properties', {'category_slug': 'villa'}) }}">
+                        <div class="content">
+                            <i class="flaticon-building"></i>
+                            <h4>Villas</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 wow fadeInLeft delay-04s">
+                    <a href="{{ path('front_list_by_category__properties', {'category_slug': 'terrain'}) }}">
+                        <div class="content">
+                            <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
+                            <h4>Terrains</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 wow fadeInLeft delay-04s">
+                    <a href="{{ path('front_list_by_category__properties', {'category_slug': 'local-commercial'}) }}">
+                        <div class="content">
+                            <i class="flaticon-symbol"></i>
+                            <h4>Local commercial</h4>
+                        </div>
+                    </a>
+                </div>
+                {#<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 wow fadeInLeft delay-04s">
+                    <a href="{{ path('front_list_properties', {'category_slug': 'commerce'}) }}">
+                        <div class="content">
+                            <i class="lnr lnr-store"></i>
+                            <h4>Commercial</h4>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 wow fadeInLeft delay-04s">
+                    <a href="{{ path('front_list_properties', {'category_slug': 'bureau'}) }}">
+                        <div class="content">
+                            <i class="fa fa-building"></i>
+                            <h4>Bureau</h4>
+                        </div>
+                    </a>
+                </div>#}
+            </div>
+        </div>
+    </div>
+    <!-- Section-1 end -->
+
+    <!-- Counters strat -->
+    <div class="counters">
+        <div class="counters-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft delay-04s">
+                        <div class="counter-box">
+                            <i class="flaticon-tag"></i>
+                            <h1 class="counter">{{ countPropertiesOnline }}</h1>
+                            <p>Total annonces</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInLeft delay-04s">
+                        <div class="counter-box">
+                            <i class="flaticon-symbol-1"></i>
+                            <h1 class="counter">{{ countPropertiesOnline }}</h1>
+                            <p>Total annonces</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight delay-04s">
+                        <div class="counter-box">
+                            <i class="flaticon-people"></i>
+                            <h1 class="counter">{{ countUsers }}</h1>
+                            <p>Utilisateurs</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInRight delay-04s">
+                        <div class="counter-box">
+                            <i class="flaticon-shape"></i>
+                            <h1 class="counter">{{ countViews }}</h1>
+                            <p>Vue des annonces</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Counters end -->
+{% endblock %}
